@@ -18,9 +18,14 @@
   [plugins.inputs]
     paths = ["node_modules/.cache", ".eslintcache"]
 
-# Enable Brotli & Gzip compression
+# Enable Brotli & Gzip compression and processing
 [build.processing]
   skip_processing = false
+  css.minify = true
+  js.minify = true
+  js.bundle = true
+  html.pretty_urls = true
+  images.compress = true
   
 [build.processing.css]
   bundle = true
@@ -45,14 +50,6 @@
       "</assets/vendor.*.js>; rel=preload; as=script",
       "</assets/main.*.js>; rel=preload; as=script"
     ]
-
-# Post Processing 
-[build.processing]
-  css.minify = true
-  js.minify = true
-  js.bundle = true
-  html.pretty_urls = true
-  images.compress = true
 
 # Environment variables
 [context.production.environment]
