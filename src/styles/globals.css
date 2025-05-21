@@ -1,0 +1,36 @@
+/* Removed scroll animation since we're using requestAnimationFrame instead */
+
+.card-container {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+.card {
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+}
+
+/* Rotating text styles */
+.react-rotating-text-cursor {
+  animation: blink 1s infinite;
+  opacity: 1;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Override default rotating text styles */
+.rotating-text {
+  font-size: 24px; /* Adjust as needed */
+  color: #ffffff; /* Change color as needed */
+  display: inline-block;
+  font-weight: bold;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.bg-gradient-overlay {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+} 

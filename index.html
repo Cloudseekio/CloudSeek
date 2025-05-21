@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <meta name="theme-color" content="#0f1628" />
+    <meta name="description" content="A progressive web app for our blog" />
+    
+    <!-- Favicon links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Resource hints for critical external resources -->
+    <!-- Preconnect to important domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.cloudseek.io" crossorigin />
+    <link rel="preconnect" href="https://images.ctfassets.net" crossorigin />
+    <link rel="preconnect" href="https://cdn.contentful.com" crossorigin />
+    
+    <!-- DNS prefetch for third-party domains -->
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://images.ctfassets.net" />
+    <link rel="dns-prefetch" href="https://api.cloudseek.io" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/css/main.css" as="style" fetchpriority="high" />
+    <link rel="preload" href="/src/main.tsx" as="script" fetchpriority="high" />
+    <link rel="preload" href="/assets/fonts/SF-Pro-Display-Regular.woff2" as="font" type="font/woff2" crossorigin fetchpriority="high" />
+    <link rel="preload" href="/assets/fonts/SF-Pro-Display-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/SF-Pro-Display-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="CloudSeek" />
+    
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- Google Analytics Initialization -->
+    <script>
+      // Initialize dataLayer
+      window.dataLayer = window.dataLayer || [];
+      
+      // Create a stub gtag function that will be replaced by the real one
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      
+      // Set the current timestamp
+      gtag('js', new Date());
+      
+      // Honor Do Not Track
+      var doNotTrack = 
+        navigator.doNotTrack === '1' || 
+        window.doNotTrack === '1' || 
+        navigator.doNotTrack === 'yes';
+      
+      if (doNotTrack) {
+        console.log('Do Not Track enabled - analytics disabled');
+        // Override gtag with a no-op function
+        window.gtag = function() {
+          if (window.analyticsDebug) {
+            console.log('Analytics call blocked due to DNT:', arguments);
+          }
+        };
+      } 
+    </script>
+    
+    <!-- Only load GA script if Do Not Track is not enabled -->
+    <script>
+      if (!doNotTrack) {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-8H4P0JWKL1";
+        document.head.appendChild(gaScript);
+        
+        // Handle script loading errors
+        gaScript.onerror = function() {
+          console.warn('Google Analytics failed to load - using fallback');
+          window.gtag = function() {
+            if (window.analyticsDebug) {
+              console.log('Analytics call using fallback:', arguments);
+            }
+          };
+        };
+      }
+    </script>
+    
+    <title>CloudSeek - Premium Salesforce Consulting Partner</title>
+    
+    <!-- Meta description -->
+    <meta name="description" content="CloudSeek is a premium Salesforce Consulting Partner delivering innovative CRM solutions across USA and UAE. We specialize in Salesforce implementation, customization, and integration services that drive digital transformation, optimize business processes, and enhance customer experiences.">
+    
+    <!-- OpenGraph tags -->
+    <meta property="og:title" content="CloudSeek - Premium Salesforce Consulting Partner">
+    <meta property="og:description" content="CloudSeek is a premium Salesforce Consulting Partner delivering innovative CRM solutions across USA and UAE. We specialize in Salesforce implementation, customization, and integration services that drive digital transformation.">
+    <meta property="og:image" content="/images/cloudseek-og-image.jpg">
+    <meta property="og:url" content="https://cloudseek.io">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="CloudSeek - Premium Salesforce Consulting Partner">
+    <meta name="twitter:description" content="Premium Salesforce Consulting Partner in USA & UAE providing implementation, customization & integration services">
+    <meta name="twitter:image" content="/images/cloudseek-og-image.jpg">
+    
+    <!-- Schema.org Organization markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "CloudSeek",
+      "url": "https://cloudseek.io",
+      "logo": "https://cloudseek.io/images/logo.png",
+      "description": "CloudSeek is a premium Salesforce Consulting Partner delivering innovative CRM solutions across USA and UAE. We specialize in Salesforce implementation, customization, and integration services that drive digital transformation, optimize business processes, and enhance customer experiences.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "75 Technology Drive, Suite 300",
+        "addressLocality": "North Carolina",
+        "addressRegion": "NC",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-800-CLOUDSEEK",
+        "contactType": "customer service",
+        "availableLanguage": ["English", "Arabic"],
+        "email": ["info@cloudseek.io", "sales@cloudseek.io", "support@cloudseek.io"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/cloudseek",
+        "https://www.twitter.com/cloudseek",
+        "https://www.linkedin.com/company/cloudseek",
+        "https://www.instagram.com/cloudseek"
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/serviceWorker.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>

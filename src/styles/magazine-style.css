@@ -1,0 +1,1344 @@
+/* Magazine-style layout for Case Studies */
+.magazine-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #1a202c;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.magazine-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.magazine-header h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+  color: #1a202c;
+}
+
+.magazine-tagline {
+  font-size: 1.25rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Featured section */
+.featured-section {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.featured-case-study {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-case-study:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.main-feature {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.secondary-feature {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.featured-image {
+  position: relative;
+  height: 350px;
+}
+
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-content {
+  padding: 1.5rem;
+  background: white;
+}
+
+.company-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-tag {
+  display: inline-block;
+  background: #f0f5ff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  color: #0066cc;
+}
+
+.read-more-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #0066cc;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+}
+
+.read-more-link:after {
+  content: '→';
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.read-more-link:hover:after {
+  transform: translateX(4px);
+}
+
+/* Category divider */
+.category-divider {
+  display: flex;
+  align-items: center;
+  margin: 3rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.category-divider h3 {
+  margin: 0 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Magazine grid */
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.magazine-item {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: white;
+}
+
+.magazine-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.magazine-item-large {
+  grid-column: span 2;
+}
+
+.magazine-item-image {
+  position: relative;
+  height: 220px;
+}
+
+.magazine-item-large .magazine-item-image {
+  height: 300px;
+}
+
+.magazine-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.magazine-item-content {
+  padding: 1.25rem;
+}
+
+.magazine-item-content h3 {
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.magazine-item-content p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.magazine-cta {
+  text-align: center;
+  background: #f7fafc;
+  padding: 4rem 2rem;
+  border-radius: 8px;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.magazine-cta h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.magazine-cta p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-block;
+  background: #0066cc;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.cta-button:hover {
+  background-color: #0052a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .magazine-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .featured-section {
+    grid-template-columns: 1fr;
+  }
+  
+  .main-feature, .secondary-feature {
+    grid-column: 1;
+  }
+  
+  .main-feature {
+    grid-row: 1;
+  }
+  
+  .secondary-feature {
+    grid-row: 2;
+  }
+  
+  .magazine-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .magazine-item-large {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .magazine-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .magazine-cta {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Results styling */
+.results-list {
+  margin: 1rem 0;
+}
+
+.result-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.result-check {
+  color: #0066cc;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.grid-results {
+  margin: 0.75rem 0;
+}
+
+.key-result {
+  font-size: 0.9rem;
+  color: #0066cc;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  background-color: rgba(0, 102, 204, 0.08);
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Testimonial quotes */
+.testimonial-quote {
+  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #555;
+  border-left: 3px solid #0066cc;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.quote-mark {
+  color: #0066cc;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0.2rem;
+}
+
+/* Success Metrics Section */
+.success-metrics-section {
+  margin: 5rem 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.section-title:after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #0066cc;
+  margin: 1rem auto;
+}
+
+.metrics-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.metric-card {
+  flex: 1;
+  min-width: 180px;
+  background: white;
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+}
+
+.metric-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0066cc;
+  margin-bottom: 1rem;
+}
+
+.metric-label {
+  font-size: 1.1rem;
+  color: #444;
+}
+
+/* Recent Projects Section */
+.recent-projects-section {
+  margin: 5rem 0;
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.recent-case-study {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.recent-case-study:hover {
+  transform: translateY(-8px);
+}
+
+.recent-image {
+  position: relative;
+  height: 220px;
+}
+
+.recent-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recent-category {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.recent-content {
+  padding: 1.5rem;
+}
+
+.recent-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.key-result-highlight {
+  margin: 1.2rem 0;
+  padding: 0.8rem 1rem;
+  background: rgba(0, 102, 204, 0.08);
+  color: #0066cc;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Industries Section */
+.industries-section {
+  margin: 5rem 0;
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.industry-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.industry-title {
+  background: #0066cc;
+  color: white;
+  margin: 0;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.4rem;
+}
+
+.industry-studies {
+  padding: 1.5rem;
+}
+
+.industry-study-item {
+  display: flex;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.industry-study-item:last-child {
+  margin-bottom: 0;
+}
+
+.industry-study-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.industry-study-content {
+  flex: 1;
+}
+
+.industry-study-content h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.industry-study-content p {
+  margin: 0 0 0.8rem 0;
+  font-size: 0.9rem;
+  color: #0066cc;
+}
+
+.industry-link {
+  font-size: 0.9rem;
+  color: #0066cc;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.industry-link:hover {
+  text-decoration: underline;
+}
+
+/* Highlighted Case Studies Section */
+.highlighted-section {
+  margin: 5rem 0;
+}
+
+.highlight-card {
+  display: flex;
+  margin-bottom: 3rem;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-left {
+  flex-direction: row;
+}
+
+.highlight-right {
+  flex-direction: row-reverse;
+}
+
+.highlight-image {
+  flex: 1;
+  max-width: 40%;
+}
+
+.highlight-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.highlight-content {
+  flex: 1.5;
+  padding: 2.5rem;
+}
+
+.highlight-content h3 {
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.highlight-content h4 {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.highlight-results {
+  margin: 1.5rem 0;
+}
+
+.highlight-result-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+.highlight-testimonial {
+  background: #f8f9fa;
+  padding: 1.2rem 1.8rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #555;
+  border-left: 3px solid #0066cc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.highlight-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  background: #0066cc;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.highlight-link:hover {
+  background: #004d99;
+}
+
+/* Process Section */
+.process-section {
+  margin: 5rem 0;
+  padding: 3rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.process-step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #0066cc;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+}
+
+.process-step h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+}
+
+.process-step p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Responsive adjustments for new sections */
+@media (max-width: 1024px) {
+  .recent-grid,
+  .industries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .metrics-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .metric-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .recent-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .industries-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .highlight-card {
+    flex-direction: column;
+  }
+  
+  .highlight-image {
+    max-width: 100%;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-steps {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* CloudSeek Case Studies Page Styles */
+
+/* Base Container */
+.cloudseek-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #1a202c;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Page Header */
+.cs-page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.cs-page-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.cs-page-subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Button Styles */
+.cs-btn {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+}
+
+.cs-btn-primary, 
+.cta-button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+}
+
+.cs-btn-primary:hover,
+.cta-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.cs-btn-link,
+.read-more-link {
+  color: #2563eb;
+}
+
+.cs-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+}
+
+/* Cards and Sections */
+.cs-section-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  color: #1a202c;
+  position: relative;
+}
+
+.cs-section-title:after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #2563eb;
+  margin: 1rem auto;
+}
+
+/* Featured Section */
+.cs-featured-section {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.cs-featured-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.cs-featured-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.cs-main-feature {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.cs-secondary-feature {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.cs-card-image {
+  position: relative;
+  height: 280px;
+}
+
+.cs-main-feature .cs-card-image {
+  height: 380px;
+}
+
+.cs-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-card-content {
+  padding: 1.75rem;
+}
+
+.cs-card-content h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+.cs-card-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+.cs-card-content p {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* Category tags and badges */
+.cs-category-tag,
+.category-tag {
+  background: #eef2ff;
+  color: #2563eb;
+}
+
+.cs-company-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: white;
+  color: #1a202c;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cs-image-category {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Results */
+.cs-results-list {
+  margin: 1.5rem 0;
+}
+
+.cs-result-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.cs-checkmark,
+.result-check {
+  color: #2563eb;
+  margin-right: 0.75rem;
+  font-weight: bold;
+}
+
+.cs-key-result,
+.key-result {
+  color: #2563eb;
+  background-color: rgba(37, 99, 235, 0.08);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  margin: 1rem 0;
+}
+
+/* Testimonials */
+.cs-testimonial {
+  background: #f7fafc;
+  padding: 1.25rem 1.75rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #4a5568;
+  border-left: 3px solid #0066cc;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.cs-quote {
+  color: #0066cc;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0.2rem;
+}
+
+/* Metrics Section */
+.cs-metrics-section {
+  margin: 5rem 0;
+  padding: 3rem 2rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.cs-metrics-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.cs-metric-card {
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.cs-metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+}
+
+.cs-metric-number {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #0066cc;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.cs-metric-label {
+  font-size: 1.1rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* Recent Projects Section */
+.cs-recent-section {
+  margin: 5rem 0;
+}
+
+.cs-recent-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.cs-recent-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.cs-recent-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Industries Section */
+.cs-industries-section {
+  margin: 5rem 0;
+}
+
+.cs-industries-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.cs-industry-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cs-industry-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.cs-industry-title {
+  background-color: #2563eb;
+  color: white;
+  padding: 1rem 1.5rem;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 8px 8px 0 0;
+}
+
+.cs-industry-studies {
+  padding: 1.5rem;
+}
+
+.cs-industry-item {
+  display: flex;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+.cs-industry-item:last-child {
+  margin-bottom: 0;
+}
+
+.cs-industry-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.cs-industry-content {
+  flex: 1;
+}
+
+.cs-industry-content h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #1a202c;
+}
+
+.cs-industry-content p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
+  color: #0066cc;
+}
+
+/* Highlighted Case Studies */
+.cs-highlight-section {
+  margin: 5rem 0;
+}
+
+.cs-highlight-card {
+  display: flex;
+  margin-bottom: 3rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cs-align-left {
+  flex-direction: row;
+}
+
+.cs-align-right {
+  flex-direction: row-reverse;
+}
+
+.cs-highlight-image {
+  flex: 1;
+  max-width: 40%;
+}
+
+.cs-highlight-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-highlight-content {
+  flex: 1.5;
+  padding: 2.5rem;
+}
+
+.cs-highlight-content h3 {
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+  color: #1a202c;
+}
+
+.cs-highlight-content h4 {
+  margin: 0 0 1.5rem 0;
+  color: #4a5568;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.cs-highlight-results {
+  margin: 1.5rem 0;
+}
+
+/* Divider */
+.cs-divider {
+  display: flex;
+  align-items: center;
+  margin: 4rem 0;
+}
+
+.cs-divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.cs-divider h3 {
+  margin: 0 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+/* Grid Section */
+.cs-grid-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+.cs-grid-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.cs-grid-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.cs-grid-large {
+  grid-column: span 2;
+}
+
+.cs-grid-large .cs-card-image {
+  height: 320px;
+}
+
+/* Process Section */
+.cs-process-section {
+  margin: 5rem 0;
+  padding: 3rem 2rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.cs-process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.cs-process-step {
+  text-align: center;
+}
+
+.cs-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #2563eb;
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+}
+
+.cs-process-step h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.3rem;
+  color: #1a202c;
+}
+
+.cs-process-step p {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cs-cta-section {
+  text-align: center;
+  background: #f7fafc;
+  padding: 4rem 2rem;
+  border-radius: 8px;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.cs-cta-section h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #1a202c;
+}
+
+.cs-cta-section p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .cs-featured-section,
+  .cs-grid-section,
+  .cs-recent-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .cs-main-feature {
+    grid-column: 1 / 3;
+  }
+  
+  .cs-secondary-feature {
+    grid-column: 1 / 3;
+  }
+  
+  .cs-process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cs-metrics-container {
+    flex-direction: column;
+  }
+  
+  .cs-metric-card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .cs-recent-grid,
+  .cs-industries-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cs-highlight-card {
+    flex-direction: column;
+  }
+  
+  .cs-highlight-image {
+    max-width: 100%;
+    height: 250px;
+  }
+  
+  .cs-grid-large {
+    grid-column: span 1;
+  }
+  
+  .cs-grid-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-page-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .cs-section-title {
+    font-size: 2rem;
+  }
+  
+  .cs-process-steps {
+    grid-template-columns: 1fr;
+  }
+  
+  .cloudseek-container {
+    padding: 1.5rem;
+  }
+  
+  .cs-highlight-content,
+  .cs-card-content {
+    padding: 1.5rem;
+  }
+  
+  .cs-cta-section h2 {
+    font-size: 1.8rem;
+  }
+} 

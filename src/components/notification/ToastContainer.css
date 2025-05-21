@@ -1,0 +1,108 @@
+.toast-container-wrapper {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.toast-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  padding: 16px;
+  overflow-y: auto;
+  pointer-events: none;
+}
+
+/* Make all toast elements receive pointer events */
+.toast-container * {
+  pointer-events: auto;
+}
+
+/* Positioning for the toast containers */
+.toast-container-top-right {
+  top: 0;
+  right: 0;
+  align-items: flex-end;
+}
+
+.toast-container-top-left {
+  top: 0;
+  left: 0;
+  align-items: flex-start;
+}
+
+.toast-container-bottom-right {
+  bottom: 0;
+  right: 0;
+  align-items: flex-end;
+}
+
+.toast-container-bottom-left {
+  bottom: 0;
+  left: 0;
+  align-items: flex-start;
+}
+
+.toast-container-top-center {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+.toast-container-bottom-center {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+/* Scrollbar styles (hidden by default) */
+.toast-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toast-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toast-container::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5);
+  border-radius: 20px;
+  border: transparent;
+}
+
+/* Only show scrollbar when hovering */
+.toast-container:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  /* On mobile, we want to stack all notifications at the bottom */
+  .toast-container-top-left,
+  .toast-container-top-right,
+  .toast-container-top-center {
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    align-items: center;
+  }
+  
+  .toast-container-bottom-left,
+  .toast-container-bottom-right,
+  .toast-container-bottom-center {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    align-items: center;
+  }
+} 

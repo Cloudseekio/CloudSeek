@@ -1,0 +1,195 @@
+.progress-bar-wrapper {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.progress-bar-label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.progress-bar-description {
+  font-size: 12px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4299e1;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-bar-value {
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Sizes */
+.progress-bar-sm {
+  height: 6px;
+}
+
+.progress-bar-md {
+  height: 12px;
+}
+
+.progress-bar-lg {
+  height: 20px;
+}
+
+/* Variants */
+.progress-bar-default .progress-bar {
+  background-color: #4299e1;
+}
+
+.progress-bar-success .progress-bar {
+  background-color: #48bb78;
+}
+
+.progress-bar-warning .progress-bar {
+  background-color: #ed8936;
+}
+
+.progress-bar-error .progress-bar {
+  background-color: #e53e3e;
+}
+
+.progress-bar-info .progress-bar {
+  background-color: #38b2ac;
+}
+
+/* Striped pattern */
+.progress-bar-striped .progress-bar {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+/* Animation */
+.progress-bar-animated .progress-bar {
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+/* Indeterminate state */
+.progress-bar-indeterminate .progress-bar {
+  width: 100%;
+  background-color: #4299e1;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-indeterminate .progress-bar::before {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+
+.progress-bar-indeterminate .progress-bar::after {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation-delay: 1.15s;
+}
+
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+
+/* Complete state */
+.progress-bar-complete .progress-bar {
+  background-color: #48bb78;
+}
+
+/* Increasing/decreasing animations */
+.progress-bar-increasing .progress-bar {
+  transition: width 0.3s ease-out;
+}
+
+.progress-bar-decreasing .progress-bar {
+  transition: width 0.3s ease-in;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .progress-bar-label {
+    color: #e2e8f0;
+  }
+  
+  .progress-bar-description {
+    color: #a0aec0;
+  }
+  
+  .progress-bar-container {
+    background-color: #2d3748;
+  }
+} 

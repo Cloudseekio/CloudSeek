@@ -1,0 +1,19 @@
+import React from 'react';
+import RotatingTextSlider from './RotatingTextSlider'; // Adjust the path if necessary
+
+const TestRotatingText: React.FC = () => {
+  const rotatingTextItems = [
+    "We Helped ABB to Achieve 100% ticket resolution.",
+    "We Helped Microsoft to Improve Efficiency by 30%.",
+    "We Helped Salesforce to Enhance Customer Satisfaction."
+  ];
+
+  return (
+    <div>
+      <h1>Testing Rotating Text Slider</h1>
+      <RotatingTextSlider items={rotatingTextItems} />
+    </div>
+  );
+};
+
+export default TestRotatingText;

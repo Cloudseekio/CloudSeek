@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Skeleton Loading Animations */
+@layer components {
+  /* Shimmer effect for skeleton loading */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Wave effect for skeleton loading */
+  @keyframes wave {
+    0% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.6;
+    }
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(to right, #e5e7eb 8%, #f3f4f6 18%, #e5e7eb 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .skeleton-wave {
+    animation: wave 1.5s ease infinite;
+  }
+
+  /* Accessibility - disable animations if user prefers reduced motion */
+  @media (prefers-reduced-motion) {
+    .skeleton-shimmer,
+    .skeleton-wave,
+    .animate-pulse {
+      animation: none;
+    }
+  }
+}

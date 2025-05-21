@@ -1,0 +1,4 @@
+# Redirect /blogs/ to /blog/ (301 permanent redirect)
+RewriteEngine On
+RewriteRule ^blogs/?$ /blog/ [R=301,L]
+RewriteRule ^blogs/(.*)$ /blog/$1 [R=301,L] 

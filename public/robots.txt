@@ -1,0 +1,65 @@
+# robots.txt file for cloudseek.io
+# Last updated: 2025-05-20
+
+# Default directive for all robots
+User-agent: *
+Allow: /
+
+# Disallow admin and user-specific paths
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /account/
+Disallow: /dashboard/
+Disallow: /user/
+Disallow: /profile/
+Disallow: /settings/
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /cart/
+
+# Disallow temporary or development-specific paths
+Disallow: /dev/
+Disallow: /test/
+Disallow: /staging/
+Disallow: /tmp/
+Disallow: /*?*  # Block URLs with query parameters
+
+# Specific directives for Google
+User-agent: Googlebot
+Allow: /
+Disallow: /thank-you/  # Thank you pages after form submissions
+
+# Specific directives for Google Image
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /assets/images/
+Allow: /public/images/
+
+# Specific directives for Bing
+User-agent: Bingbot
+Allow: /
+
+# Specific directives for Yandex
+User-agent: Yandexbot
+Allow: /
+
+# Allow ads crawlers to access relevant content
+User-agent: Mediapartners-Google
+Allow: /
+
+# Specific directives for Facebook
+User-agent: Facebot
+Allow: /
+
+# Specify crawl delay for some bots to reduce server load
+User-agent: Baiduspider
+Crawl-delay: 10
+
+# Block archive.org from archiving sensitive pages
+User-agent: ia_archiver
+Disallow: /customers/
+Disallow: /clients/
+
+# Sitemaps (XML, news, video, and image)
+Sitemap: https://cloudseek.io/sitemap.xml 

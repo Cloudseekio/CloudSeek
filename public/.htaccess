@@ -1,0 +1,205 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Redirect all requests to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Handle SPA routing - redirect all requests to index.html
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# Enable Compression
+<IfModule mod_deflate.c>
+  # Enable compression
+  SetOutputFilter DEFLATE
+  
+  # Don't compress images, videos, etc.
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|mp4|webm|ogg)$ no-gzip dont-vary
+  
+  # Compress HTML, CSS, JavaScript, Text, XML and fonts
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/font-woff
+  AddOutputFilterByType DEFLATE application/font-woff2
+  AddOutputFilterByType DEFLATE font/woff
+  AddOutputFilterByType DEFLATE font/woff2
+  AddOutputFilterByType DEFLATE font/ttf
+  AddOutputFilterByType DEFLATE font/eot
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# Brotli compression (if available)
+<IfModule mod_brotli.c>
+  SetOutputFilter BROTLI
+  SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|mp4|webm|ogg)$ no-gzip dont-vary
+  
+  AddOutputFilterByType BROTLI application/javascript
+  AddOutputFilterByType BROTLI application/json
+  AddOutputFilterByType BROTLI application/xml
+  AddOutputFilterByType BROTLI application/font-woff
+  AddOutputFilterByType BROTLI application/font-woff2
+  AddOutputFilterByType BROTLI font/woff
+  AddOutputFilterByType BROTLI font/woff2
+  AddOutputFilterByType BROTLI font/ttf
+  AddOutputFilterByType BROTLI text/css
+  AddOutputFilterByType BROTLI text/html
+  AddOutputFilterByType BROTLI text/javascript
+  AddOutputFilterByType BROTLI text/plain
+  AddOutputFilterByType BROTLI text/xml
+  AddOutputFilterByType BROTLI image/svg+xml
+</IfModule>
+
+# Serve Brotli compressed files if they exist and client accepts br
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP:Accept-Encoding} br
+  RewriteCond %{REQUEST_FILENAME}.br -f
+  RewriteRule ^(.*)$ $1.br [QSA,L]
+  
+  # Serve correct content types
+  <FilesMatch "\.js\.br$">
+    ForceType application/javascript
+    Header set Content-Encoding br
+  </FilesMatch>
+  <FilesMatch "\.css\.br$">
+    ForceType text/css
+    Header set Content-Encoding br
+  </FilesMatch>
+  <FilesMatch "\.svg\.br$">
+    ForceType image/svg+xml
+    Header set Content-Encoding br
+  </FilesMatch>
+  <FilesMatch "\.html\.br$">
+    ForceType text/html
+    Header set Content-Encoding br
+  </FilesMatch>
+</IfModule>
+
+# Serve gzip compressed files if they exist and client accepts gzip
+<IfModule mod_rewrite.c>
+  RewriteCond %{HTTP:Accept-Encoding} gzip
+  RewriteCond %{REQUEST_FILENAME}.gz -f
+  RewriteRule ^(.*)$ $1.gz [QSA,L]
+  
+  # Serve correct content types
+  <FilesMatch "\.js\.gz$">
+    ForceType application/javascript
+    Header set Content-Encoding gzip
+  </FilesMatch>
+  <FilesMatch "\.css\.gz$">
+    ForceType text/css
+    Header set Content-Encoding gzip
+  </FilesMatch>
+  <FilesMatch "\.svg\.gz$">
+    ForceType image/svg+xml
+    Header set Content-Encoding gzip
+  </FilesMatch>
+  <FilesMatch "\.html\.gz$">
+    ForceType text/html
+    Header set Content-Encoding gzip
+  </FilesMatch>
+</IfModule>
+
+# Cache Control Headers
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Default expiry: 1 day
+  ExpiresDefault "access plus 1 day"
+  
+  # CSS and JS: 1 year (they have hashed filenames for cache busting)
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  
+  # Media files: 1 month
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/avif "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType video/mp4 "access plus 1 month"
+  ExpiresByType video/webm "access plus 1 month"
+  
+  # Fonts: 1 year
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType font/otf "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  
+  # Data: 0 seconds for critical dynamic data
+  ExpiresByType application/json "access plus 0 seconds"
+  
+  # Set Cache-Control header explicitly
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|ico|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  
+  <FilesMatch "\.(ttf|otf|woff|woff2|eot)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  
+  # Never cache HTML to ensure latest version
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+</IfModule>
+
+# HTTP/2 Server Push
+<IfModule mod_http2.c>
+  # Push critical CSS and JS from index.html
+  <FilesMatch "index\.html$">
+    Header add Link "</assets/css/main.[hash].css>; rel=preload; as=style"
+    Header add Link "</assets/[name].[hash].js>; rel=preload; as=script"
+    
+    # Fonts
+    Header add Link "</assets/fonts/[name].[hash].woff2>; rel=preload; as=font; crossorigin"
+  </FilesMatch>
+</IfModule>
+
+# CORS Headers for fonts
+<FilesMatch "\.(ttf|otf|eot|woff|woff2)$">
+  <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+  </IfModule>
+</FilesMatch>
+
+# Security Headers
+<IfModule mod_headers.c>
+  # HSTS (HTTP Strict Transport Security)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  
+  # Content Security Policy
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https:; media-src 'self'; object-src 'none'; frame-src 'self';"
+  
+  # X-Content-Type-Options
+  Header set X-Content-Type-Options "nosniff"
+  
+  # X-Frame-Options
+  Header set X-Frame-Options "SAMEORIGIN"
+  
+  # X-XSS-Protection
+  Header set X-XSS-Protection "1; mode=block"
+  
+  # Referrer-Policy
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Feature-Policy
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule> 

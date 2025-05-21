@@ -1,0 +1,289 @@
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Dot variant */
+.status-indicator-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-indicator-sm .status-dot {
+  width: 6px;
+  height: 6px;
+}
+
+.status-indicator-md .status-dot {
+  width: 8px;
+  height: 8px;
+}
+
+.status-indicator-lg .status-dot {
+  width: 12px;
+  height: 12px;
+}
+
+.status-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator-sm .status-label {
+  font-size: 12px;
+}
+
+.status-indicator-lg .status-label {
+  font-size: 16px;
+}
+
+/* Badge variant */
+.status-indicator-badge .status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+}
+
+.status-indicator-sm .status-badge {
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+.status-indicator-lg .status-badge {
+  padding: 6px 12px;
+  font-size: 16px;
+}
+
+/* Pill variant */
+.status-indicator-pill .status-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator-sm .status-pill {
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 12px;
+}
+
+.status-indicator-lg .status-pill {
+  padding: 6px 16px;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+/* Text variant */
+.status-indicator-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator-sm.status-indicator-text {
+  font-size: 12px;
+}
+
+.status-indicator-lg.status-indicator-text {
+  font-size: 16px;
+}
+
+/* Status colors */
+.status-success .status-dot,
+.status-success.status-indicator-pill .status-pill,
+.status-success.status-indicator-badge .status-badge {
+  background-color: #38a169;
+  color: white;
+}
+
+.status-error .status-dot,
+.status-error.status-indicator-pill .status-pill,
+.status-error.status-indicator-badge .status-badge {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.status-warning .status-dot,
+.status-warning.status-indicator-pill .status-pill,
+.status-warning.status-indicator-badge .status-badge {
+  background-color: #ed8936;
+  color: white;
+}
+
+.status-info .status-dot,
+.status-info.status-indicator-pill .status-pill,
+.status-info.status-indicator-badge .status-badge {
+  background-color: #3182ce;
+  color: white;
+}
+
+.status-pending .status-dot,
+.status-pending.status-indicator-pill .status-pill,
+.status-pending.status-indicator-badge .status-badge {
+  background-color: #805ad5;
+  color: white;
+}
+
+.status-idle .status-dot,
+.status-idle.status-indicator-pill .status-pill,
+.status-idle.status-indicator-badge .status-badge {
+  background-color: #718096;
+  color: white;
+}
+
+.status-running .status-dot,
+.status-running.status-indicator-pill .status-pill,
+.status-running.status-indicator-badge .status-badge {
+  background-color: #4299e1;
+  color: white;
+}
+
+.status-completed .status-dot,
+.status-completed.status-indicator-pill .status-pill,
+.status-completed.status-indicator-badge .status-badge {
+  background-color: #48bb78;
+  color: white;
+}
+
+/* Text variant colors */
+.status-success.status-indicator-text {
+  color: #38a169;
+}
+
+.status-error.status-indicator-text {
+  color: #e53e3e;
+}
+
+.status-warning.status-indicator-text {
+  color: #ed8936;
+}
+
+.status-info.status-indicator-text {
+  color: #3182ce;
+}
+
+.status-pending.status-indicator-text {
+  color: #805ad5;
+}
+
+.status-idle.status-indicator-text {
+  color: #718096;
+}
+
+.status-running.status-indicator-text {
+  color: #4299e1;
+}
+
+.status-completed.status-indicator-text {
+  color: #48bb78;
+}
+
+/* Icon styles */
+.status-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.status-indicator-sm .status-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.status-indicator-lg .status-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Animation */
+.status-indicator.animated .status-dot.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.status-indicator .rotating {
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Disabled state */
+.status-indicator.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .status-indicator-text {
+    color: #e2e8f0;
+  }
+  
+  .status-success.status-indicator-text {
+    color: #68d391;
+  }
+  
+  .status-error.status-indicator-text {
+    color: #fc8181;
+  }
+  
+  .status-warning.status-indicator-text {
+    color: #f6ad55;
+  }
+  
+  .status-info.status-indicator-text {
+    color: #63b3ed;
+  }
+  
+  .status-pending.status-indicator-text {
+    color: #b794f4;
+  }
+  
+  .status-idle.status-indicator-text {
+    color: #a0aec0;
+  }
+  
+  .status-running.status-indicator-text {
+    color: #90cdf4;
+  }
+  
+  .status-completed.status-indicator-text {
+    color: #9ae6b4;
+  }
+} 

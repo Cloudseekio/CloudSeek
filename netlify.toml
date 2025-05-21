@@ -1,0 +1,81 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ./src ./public"
+
+# Redirects for SPA
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Build plugins to improve performance
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = ["node_modules/.cache", ".eslintcache"]
+
+# Enable Brotli & Gzip compression
+[build.processing]
+  skip_processing = false
+  
+[build.processing.css]
+  bundle = true
+  minify = true
+  
+[build.processing.js]
+  bundle = true
+  minify = true
+  
+[build.processing.html]
+  pretty_urls = true
+  
+[build.processing.images]
+  compress = true
+
+# HTTP/2 Server Push using Link headers
+[[headers]]
+  for = "/"
+  [headers.values]
+    Link = [
+      "</assets/css/main.*.css>; rel=preload; as=style", 
+      "</assets/vendor.*.js>; rel=preload; as=script",
+      "</assets/main.*.js>; rel=preload; as=script"
+    ]
+
+# Post Processing 
+[build.processing]
+  css.minify = true
+  js.minify = true
+  js.bundle = true
+  html.pretty_urls = true
+  images.compress = true
+
+# Environment variables
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "production"
+
+# Deployment contexts
+[context.production]
+  command = "npm run build"
+  
+[context.deploy-preview]
+  command = "npm run build"
+  
+[context.branch-deploy]
+  command = "npm run build"
+
+# Dev command for local testing
+[dev]
+  command = "npm run dev"
+  port = 5173
+  targetPort = 5173
+  publish = "dist"
+  framework = "#custom"
+  autoLaunch = true 
