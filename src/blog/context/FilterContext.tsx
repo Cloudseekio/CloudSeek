@@ -1,4 +1,5 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import { createContext, useContext } from 'react';
+import type { ReactNode } from 'react';
 import { BlogFilters } from '../types/blog';
 import { useFilterPersistence } from '../hooks/useFilterPersistence';
 

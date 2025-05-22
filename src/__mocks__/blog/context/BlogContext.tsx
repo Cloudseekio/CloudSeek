@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { BlogPost, BlogCategory, BlogTag } from '../../../blog/types/blog';
 
 // Define mock blog data
@@ -83,7 +84,7 @@ export const BlogProvider: React.FC<{children: ReactNode}> = ({ children }) => {
   const [error, setError] = useState<Error | null>(null);
   
   // Simulate data fetching
-  React.useEffect(() => {
+  useEffect(() => {
     const timer = setTimeout(() => {
       if (shouldReturnError) {
         setError(new Error(errorMessage));

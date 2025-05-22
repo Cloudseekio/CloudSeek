@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import { createContext, useState } from 'react';
+import type { ReactNode } from 'react';
 import { BlogFilters } from '../../../blog/types/blog';
 
 // Define the FilterContext type to match the real implementation
@@ -39,7 +40,7 @@ export const useFilters = jest.fn().mockImplementation(() => {
 
 // Create a mock FilterProvider component
 interface FilterProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
   initialFilters?: Partial<BlogFilters>;
 }
 

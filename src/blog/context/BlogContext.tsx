@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import type { ReactNode } from 'react';
 import { BlogPost, BlogCategory, BlogTag } from '../types/blog';
 import { getBlogService } from '../services/serviceFactory';
 
@@ -33,7 +34,7 @@ const BlogContext = createContext<BlogContextType>({
 export const useBlog = () => useContext(BlogContext);
 
 interface BlogProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const BlogProvider: React.FC<BlogProviderProps> = ({ children }) => {
