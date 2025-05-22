@@ -7,6 +7,9 @@ import { compressionPlugin } from './src/plugins/compressionPlugin';
 // @ts-expect-error - JavaScript module without type definitions
 import viteCriticalCSSPlugin from './src/utils/criticalCss';
 
+// Check if we're running on Netlify
+const isNetlify = process.env.NETLIFY === 'true';
+
 // Image optimization plugin
 const imageOptimizationPlugin = () => {
   return {
@@ -14,7 +17,12 @@ const imageOptimizationPlugin = () => {
     buildStart() {
       console.log('🖼️ Running image optimization...');
       try {
-        execSync('node scripts/convertImagesToWebP.js', { stdio: 'inherit' });
+        if (isNetlify) {
+          console.log('Detected Netlify environment, skipping image conversion');
+          console.log('Images will be optimized via Netlify Image CDN');
+        } else {
+          execSync('node scripts/convertImagesToWebP.js', { stdio: 'inherit' });
+        }
       } catch (error) {
         console.error('Image optimization failed:', error);
       }
