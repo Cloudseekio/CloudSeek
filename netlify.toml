@@ -1,6 +1,6 @@
 # Build settings
 [build]
-  command = "npm run build"
+  command = "npm install --legacy-peer-deps && npm run build"
   publish = "dist"
 
 # Redirects for SPA
@@ -43,13 +43,13 @@
 
 # Build contexts
 [context.production]
-  command = "npm run build"
+  command = "npm install --legacy-peer-deps && npm run build"
 
 [context.deploy-preview]
-  command = "npm run build"
+  command = "npm install --legacy-peer-deps && npm run build"
 
 [context.branch-deploy]
-  command = "npm run build"
+  command = "npm install --legacy-peer-deps && npm run build"
 
 # Dev settings
 [dev]
