@@ -1,6 +1,5 @@
 // App.tsx - Main application component - Forced rebuild
-import * as React from 'react';
-const { Suspense, useEffect, lazy } = React;
+import { Suspense, useEffect, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -20,6 +19,7 @@ import Training from './pages/Services/Training';
 import Support from './pages/Services/Support';
 import ConsentManager from './components/ConsentManager';
 import useAnalytics from './hooks/useAnalytics';
+import type { ReactNode } from 'react';
 
 // Only Home, MainLayout, and NotFoundPage are directly imported
 // Everything else uses lazy loading
@@ -29,8 +29,8 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const IndustriesPage = lazy(() => import('./pages/IndustriesPage'));
 const CompanyPage = lazy(() => import('./pages/CompanyPage'));
 
-// Blog related pages
-const BlogPage = lazy(() => import('./pages/BlogPage'));
+// Blog related pages - commented out unused import
+// const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const DebugPage = lazy(() => import('./blog/pages/DebugPage'));
 const BlogRedirect = lazy(() => import('./components/BlogRedirect'));
@@ -104,7 +104,7 @@ const ScrollToTop = () => {
 };
 
 // Wrapper component to initialize analytics
-const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
   // Initialize analytics with our configuration
   useAnalytics({
     debug: true,
@@ -118,7 +118,7 @@ const AnalyticsWrapper: React.FC<{ children: React.ReactNode }> = ({ children })
 };
 
 // Wrapper component to conditionally show consent manager
-const ConsentManagerWrapper: React.FC = () => {
+const ConsentManagerWrapper = () => {
   const location = useLocation();
   
   // Don't show on privacy policy page

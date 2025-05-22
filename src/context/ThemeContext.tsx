@@ -1,5 +1,5 @@
-import * as React from 'react';
-const { createContext, useContext, useState, useEffect } = React;
+import { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -38,7 +38,7 @@ const getInitialTheme = (): Theme => {
   return 'light';
 };
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   // Use the helper function for initialization
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
