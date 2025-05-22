@@ -1,5 +1,4 @@
-import * as React from 'react';
-const { useState, useEffect } = React;
+import { useState, useEffect } from 'react';
 import { UsePWAReturn } from './usePWA';
 
 // Default return value when PWA hook fails

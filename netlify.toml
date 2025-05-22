@@ -30,13 +30,6 @@
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
 
-# Explicitly disable Next.js plugin
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-  [plugins.inputs]
-    # Disable this plugin entirely
-    enable = false
-
 # Headers for security and caching
 [[headers]]
   for = "/*"
