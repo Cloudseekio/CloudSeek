@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, ReactNode, useCallback, useEffect } from 'react';
+import { createContext, useContext, useReducer, useCallback, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 // Notification types for different visual appearances
 export type NotificationType = 'info' | 'success' | 'warning' | 'error';

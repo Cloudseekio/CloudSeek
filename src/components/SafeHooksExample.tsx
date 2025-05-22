@@ -1,4 +1,4 @@
-import * as React from 'react';
+import type { ChangeEvent } from 'react';
 import {
   useSafeState,
   useSafeEffect,
@@ -49,7 +49,7 @@ export default function SafeHooksExample() {
   }, []);
   
   // Input change handler
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSavedName(e.target.value);
   };
   

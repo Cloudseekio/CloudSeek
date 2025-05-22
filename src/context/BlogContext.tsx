@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
+import type { ReactNode } from 'react';
 import { BlogPost, BlogCategory } from '../models/Blog';
 import { useBlogData } from '../blog/hooks/useBlogData';
 

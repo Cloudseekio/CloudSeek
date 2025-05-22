@@ -1,5 +1,5 @@
-import * as React from 'react';
-const { useState } = React;
+import { useState } from 'react';
+import type { FC } from 'react';
 import { useSafePWA } from '../hooks/useSafePWA';
 import { Download } from 'lucide-react';
 
@@ -7,7 +7,7 @@ interface PWAInstallPromptProps {
   className?: string;
 }
 
-const PWAInstallPrompt: React.FC<PWAInstallPromptProps> = ({ className = '' }) => {
+const PWAInstallPrompt: FC<PWAInstallPromptProps> = ({ className = '' }) => {
   const { canInstall, installApp } = useSafePWA();
   const [isDismissed, setIsDismissed] = useState(false);
 

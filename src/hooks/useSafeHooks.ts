@@ -1,4 +1,15 @@
-import * as React from 'react';
+import { 
+  useState, 
+  useEffect, 
+  useLayoutEffect, 
+  useCallback 
+} from 'react';
+import type { 
+  EffectCallback, 
+  DependencyList, 
+  Dispatch, 
+  SetStateAction 
+} from 'react';
 
 /**
  * Helper to check if code is running in a browser environment
@@ -8,7 +19,7 @@ export const isBrowser = typeof window !== 'undefined';
 /**
  * Type for useState hook return
  */
-export type SafeStateHook<T> = [T, React.Dispatch<React.SetStateAction<T>>];
+export type SafeStateHook<T> = [T, Dispatch<SetStateAction<T>>];
 
 /**
  * Safe version of useState that works in any environment
@@ -16,7 +27,7 @@ export type SafeStateHook<T> = [T, React.Dispatch<React.SetStateAction<T>>];
  * @returns State and setState function
  */
 export function useSafeState<T>(initialState: T | (() => T)): SafeStateHook<T> {
-  return React.useState<T>(initialState);
+  return useState<T>(initialState);
 }
 
 /**
@@ -25,10 +36,10 @@ export function useSafeState<T>(initialState: T | (() => T)): SafeStateHook<T> {
  * @param deps Effect dependencies
  */
 export function useSafeEffect(
-  effect: React.EffectCallback,
-  deps?: React.DependencyList
+  effect: EffectCallback,
+  deps?: DependencyList
 ): void {
-  React.useEffect(() => {
+  useEffect(() => {
     if (isBrowser) {
       return effect();
     }
@@ -42,11 +53,11 @@ export function useSafeEffect(
  * @param deps Effect dependencies
  */
 export function useSafeLayoutEffect(
-  effect: React.EffectCallback,
-  deps?: React.DependencyList
+  effect: EffectCallback,
+  deps?: DependencyList
 ): void {
   // In non-browser environments, useLayoutEffect logs a warning, so we use useEffect instead
-  const useEffectToUse = isBrowser ? React.useLayoutEffect : React.useEffect;
+  const useEffectToUse = isBrowser ? useLayoutEffect : useEffect;
   
   useEffectToUse(() => {
     if (isBrowser) {
@@ -61,7 +72,7 @@ export function useSafeLayoutEffect(
  * @returns Current window dimensions or default values in non-browser environments
  */
 export function useWindowSize() {
-  const getSize = React.useCallback(() => {
+  const getSize = useCallback(() => {
     if (!isBrowser) {
       return { width: 0, height: 0 };
     }
@@ -95,7 +106,7 @@ export function useWindowSize() {
  * @returns Value and setter function
  */
 export function useLocalStorage<T>(key: string, initialValue: T) {
-  const readValue = React.useCallback((): T => {
+  const readValue = useCallback((): T => {
     if (!isBrowser) {
       return initialValue;
     }
@@ -111,7 +122,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   
   const [storedValue, setStoredValue] = useSafeState<T>(readValue);
   
-  const setValue = React.useCallback((value: T | ((val: T) => T)) => {
+  const setValue = useCallback((value: T | ((val: T) => T)) => {
     if (!isBrowser) {
       console.warn(`Tried setting localStorage key "${key}" in a non-browser environment`);
       return;
