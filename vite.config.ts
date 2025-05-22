@@ -107,9 +107,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      // Add jQuery alias to fix module resolution errors
-      'jquery': path.resolve(__dirname, './node_modules/jquery/dist/jquery.js')
+      '@': path.resolve(__dirname, './src')
     }
   },
   build: {
