@@ -122,6 +122,42 @@ try {
           console.log(`Copied ${sourcePath} to ${destPath}`);
         });
       }
+      
+      // Create a simple sitemap.xml if it doesn't exist in the dist directory
+      const sitemapPath = path.join(distDir, 'sitemap.xml');
+      if (!fs.existsSync(sitemapPath)) {
+        const currentDate = new Date().toISOString().split('T')[0];
+        const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://cloudseek.io/</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://cloudseek.io/about</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cloudseek.io/services</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cloudseek.io/contact</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>`;
+        
+        fs.writeFileSync(sitemapPath, sitemapContent);
+        console.log('✓ Created basic sitemap.xml');
+      }
 
       console.log('✅ Postbuild completed successfully');
       process.exit(0); // Exit with success code
