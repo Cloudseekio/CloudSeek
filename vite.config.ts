@@ -1,26 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { execSync } from 'child_process';
 
 // Check if we're running on Netlify
 const isNetlify = process.env.NETLIFY === 'true';
 
-// Image optimization plugin
-const imageOptimizationPlugin = () => {
+// Simplified build without external script dependencies
+const simpleBuildPlugin = () => {
   return {
-    name: 'image-optimization',
+    name: 'simple-build',
     buildStart() {
-      console.log('🖼️ Running image optimization...');
-      try {
-        if (isNetlify) {
-          console.log('Detected Netlify environment, skipping image conversion');
-          console.log('Images will be optimized via Netlify Image CDN');
-        } else {
-          execSync('node scripts/convertImagesToWebP.js', { stdio: 'inherit' });
-        }
-      } catch (error) {
-        console.error('Image optimization failed:', error);
+      console.log('🚀 Starting build...');
+      if (isNetlify) {
+        console.log('Detected Netlify environment');
+        console.log('Images will be optimized via Netlify Image CDN');
+      } else {
+        console.log('Local build mode');
       }
     }
   };
@@ -30,7 +25,7 @@ const imageOptimizationPlugin = () => {
 export default defineConfig({
   plugins: [
     react(),
-    imageOptimizationPlugin()
+    simpleBuildPlugin()
   ],
   optimizeDeps: {
     exclude: ['lucide-react'],
