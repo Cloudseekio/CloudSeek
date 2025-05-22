@@ -20,7 +20,7 @@
     "generate-sitemap": "node scripts/generateSitemap.js",
     "check-hooks": "node scripts/ensure-react-loading.js",
     "pre-check": "node scripts/pre-check.js",
-    "netlify-build": "node scripts/netlify-prebuild.js && node scripts/netlify-image-convert.js && npm run build && node scripts/netlify-postbuild.js && node scripts/netlify-deploy-verify.js"
+    "netlify-build": "NODE_OPTIONS=\"--experimental-modules\" node scripts/netlify-prebuild.js && NODE_OPTIONS=\"--experimental-modules\" node scripts/netlify-image-convert.js && npm run build && NODE_OPTIONS=\"--experimental-modules\" node scripts/netlify-postbuild.js && NODE_OPTIONS=\"--experimental-modules\" node scripts/netlify-deploy-verify.js"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.0.0",

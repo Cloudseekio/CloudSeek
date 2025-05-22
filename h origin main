@@ -1,0 +1,95 @@
+[33mcommit 4d4ec438447254186b4a95c67f45a0d57573881f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 16:36:33 2025 +0500
+
+    Fix content security policy and asset loading issues
+
+[33mcommit be8312fd9727e63edd6e845390e69ac157669192[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 14:44:22 2025 +0500
+
+    Fix React 19 compatibility issues in blog context files
+
+[33mcommit b9977b18fa537220a499de37e6dc3a23984dbc7a[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 13:54:59 2025 +0500
+
+    Fix React 19 hook compatibility in context providers and utility hooks
+
+[33mcommit b4a34a9ab0f831ecfb579defd262108f40a7f36d[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 13:37:23 2025 +0500
+
+    Fix React 19 useState hook imports and remove Next.js config to resolve build issues
+
+[33mcommit 5807c39b34cac2850ab875be211488b27589948b[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 13:27:09 2025 +0500
+
+    Fix React 19 compatibility issues in ThemeContext and App components
+
+[33mcommit e1cb2d04307c2a5d9e554077605ab0e4f75f4b32[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 13:15:42 2025 +0500
+
+    Fix Netlify deployment by disabling Next.js plugin and removing Next.js dependency
+
+[33mcommit 78d394d6330f9b55d2c895650a2d0e8757e3d9cc[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 13:06:09 2025 +0500
+
+    Add terser dependency and fix critical CSS plugin configuration
+
+[33mcommit 3e06a981cb1a87a95b5ed94887fe76c5f3504f8a[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 12:58:13 2025 +0500
+
+    Fix Netlify build issues by moving build dependencies to dependencies section
+
+[33mcommit e34e25493570f7acd974b7b7f894572649a04f15[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 12:46:02 2025 +0500
+
+    Move glob package from devDependencies to dependencies for Netlify build
+
+[33mcommit 078cb0bdbf594e76b19c232063fc0f33534e067a[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 12:36:41 2025 +0500
+
+    Move purgecss and postcss to dependencies for Netlify build
+
+[33mcommit 0cffa5a7ef4c13465d6752aff7f5b384a56f1c06[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 12:25:30 2025 +0500
+
+    Move vite and related packages to dependencies for Netlify production build
+
+[33mcommit 14bc198190b901d696ef3444310d44c75a289c14[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 12:16:11 2025 +0500
+
+    Update Netlify deployment configuration and scripts for improved build process
+
+[33mcommit 1508ff1be7b7b09d72dbdfcffbaa3db17afd47c7[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 11:59:05 2025 +0500
+
+    Fix dependency conflicts with legacy-peer-deps
+
+[33mcommit 5a379c664a885e9c0238647b6878f90831fb140b[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 04:15:00 2025 +0500
+
+    Fix netlify.toml syntax for deployment
+
+[33mcommit 46ac345ec40927a9bbf32e37cccbc172f9b7dc82[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Thu May 22 04:00:07 2025 +0500
+
+    Fix netlify.toml syntax error
+
+[33mcommit 7f98b50e952fc72fd1ae612d3a36922162740703[m
+Author: Cloudseekio <cloudseek.io@gmail.com>
+Date:   Wed May 21 19:26:51 2025 +0500
+
+    Add CloudSeek website files

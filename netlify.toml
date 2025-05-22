@@ -10,6 +10,7 @@
   NETLIFY_USE_PNPM = "false"
   NETLIFY_USE_NPM = "true"
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NODE_OPTIONS = "--experimental-modules"
 
 # Specify that we're using Vite
 [build.processing]
@@ -38,7 +39,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://api.cloudseek.io https://*.netlify.app; img-src 'self' data: https://*.google-analytics.com https://images.ctfassets.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://code.jquery.com; connect-src 'self' https://*.google-analytics.com https://api.cloudseek.io https://*.netlify.app; img-src 'self' data: https://*.google-analytics.com https://images.ctfassets.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), geolocation=(), microphone=()"
 
@@ -79,15 +80,15 @@
 [context.branch-deploy]
   command = "npm install --legacy-peer-deps && npm run netlify-build"
 
-# Post-deploy steps
+# Post-deploy steps - using node with ESM flags
 [context.production.post_processing]
-  post_deploy = "node scripts/netlify-deploy-verify.js"
+  post_deploy = "node --experimental-modules scripts/netlify-deploy-verify.js"
 
 [context.deploy-preview.post_processing]
-  post_deploy = "node scripts/netlify-deploy-verify.js"
+  post_deploy = "node --experimental-modules scripts/netlify-deploy-verify.js"
 
 [context.branch-deploy.post_processing]
-  post_deploy = "node scripts/netlify-deploy-verify.js"
+  post_deploy = "node --experimental-modules scripts/netlify-deploy-verify.js"
 
 # Dev settings
 [dev]
