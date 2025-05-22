@@ -1,5 +1,5 @@
 import { PexelsImage } from '../../lib/pexels';
-import { pexelsClient } from '../../lib/pexels';
+import pexelsClient from '../../lib/pexels';
 import { BlogImage } from '../../models/Blog';
 import { ContentfulAsset, CombinedAsset, isContentfulAsset, isPexelsAsset } from '../types/contentful';
 

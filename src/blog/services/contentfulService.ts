@@ -13,7 +13,7 @@ import {
   isTagEntry,
   isBlogPostEntry
 } from '../types/contentful';
-import { pexelsClient, PexelsImage, PexelsSearchParams } from '../../lib/pexels';
+import pexelsClient, { PexelsImage, PexelsSearchParams } from '../../lib/pexels';
 import { 
   extractHeadingsFromRichText,
   calculateReadingTime,
