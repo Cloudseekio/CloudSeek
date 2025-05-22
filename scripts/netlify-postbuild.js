@@ -79,31 +79,7 @@ try {
     return cssPath;
   };
 
-  // Add jQuery fallback script
-  const addJQueryFallback = () => {
-    if (fs.existsSync(indexHtmlPath)) {
-      let htmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
-      
-      // Add jQuery as a regular script tag (not a module import)
-      const jQueryScript = `<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>`;
-      
-      // Insert jQuery before the first script tag
-      if (htmlContent.indexOf('jquery') !== -1 || htmlContent.indexOf('jQuery') !== -1) {
-        htmlContent = htmlContent.replace(/<script/, `${jQueryScript}\n    <script`);
-      }
-      
-      // Make sure the main.css is properly linked in the head
-      if (!htmlContent.includes('main.css')) {
-        htmlContent = htmlContent.replace('</head>', `  <link rel="stylesheet" href="/assets/css/main.css">\n  </head>`);
-      }
-      
-      // Write the updated content
-      fs.writeFileSync(indexHtmlPath, htmlContent);
-      console.log('✓ Added jQuery fallback and CSS link to index.html');
-    } else {
-      console.error('⚠️ Could not find index.html in dist directory');
-    }
-  };
+  // Add CSS link to head if needed  const addCssLinks = () => {    if (fs.existsSync(indexHtmlPath)) {      let htmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');            // Make sure the main.css is properly linked in the head      if (!htmlContent.includes('main.css')) {        htmlContent = htmlContent.replace('</head>', `  <link rel="stylesheet" href="/assets/css/main.css">\n  </head>`);                // Write the updated content        fs.writeFileSync(indexHtmlPath, htmlContent);        console.log('✓ Added CSS link to index.html');      }    } else {      console.error('⚠️ Could not find index.html in dist directory');    }  };
 
   // Copy all font files from public to dist
   const copyFonts = () => {
@@ -154,8 +130,7 @@ try {
       createMainCss();
       copyFonts();
       
-      // Add jQuery and CSS links to index.html
-      addJQueryFallback();
+      // Add CSS links to index.html      addCssLinks();
       
       // Add extra headers file to ensure proper CSP
       const headersPath = path.join(distDir, '_headers');
@@ -169,7 +144,7 @@ try {
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://code.jquery.com data:; connect-src 'self' https://*.google-analytics.com https://api.cloudseek.io https://*.netlify.app https://www.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://images.ctfassets.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://api.cloudseek.io https://*.netlify.app https://www.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://images.ctfassets.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), geolocation=(), microphone=()
 
