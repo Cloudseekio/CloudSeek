@@ -46,7 +46,7 @@
     "dayjs": "^1.11.13",
     "dompurify": "^3.2.4",
     "framer-motion": "^12.5.0",
-    "glob": "^8.1.0",
+
     "gray-matter": "^4.0.3",
     "gsap": "^3.12.7",
     "html-to-image": "^1.11.13",
@@ -58,7 +58,7 @@
     "pexels": "^1.4.0",
     "postcss": "^8.5.3",
     "prismjs": "^1.29.0",
-    "purgecss": "^7.0.2",
+
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet": "^6.1.0",
