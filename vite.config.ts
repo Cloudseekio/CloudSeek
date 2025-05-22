@@ -142,13 +142,7 @@ export default defineConfig({
             'dayjs',
             'uuid'
           ],
-          // Group UI-related packages
-          ui: [
-            'framer-motion',
-            'react-slick',
-            'slick-carousel',
-            'styled-components'
-          ]
+                    // Group UI-related packages          ui: [            'framer-motion',            'styled-components'          ]
         },
         // Use hashed file names for better caching
         entryFileNames: 'assets/[name].[hash].js',
