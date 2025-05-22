@@ -2,6 +2,23 @@
 [build]
   command = "npm install --legacy-peer-deps && npm run netlify-build"
   publish = "dist"
+  ignore_next_js = true  # Explicitly tell Netlify to ignore Next.js processing
+
+# Configure framework detection
+[build.environment]
+  NETLIFY_USE_YARN = "false"
+  NETLIFY_USE_PNPM = "false"
+  NETLIFY_USE_NPM = "true"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+
+# Specify that we're using Vite
+[build.processing]
+  skip_processing = false
+
+# Framework detection configuration
+[build.framework]
+  name = "vite"
+  disable_nextjs = true
 
 # Redirects for SPA
 [[redirects]]
@@ -12,6 +29,13 @@
 # Build plugins
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
+
+# Explicitly disable Next.js plugin
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+  [plugins.inputs]
+    # Disable this plugin entirely
+    enable = false
 
 # Headers for security and caching
 [[headers]]
@@ -46,9 +70,11 @@
 # Environment variables
 [context.production.environment]
   NODE_ENV = "production"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 [context.deploy-preview.environment]
   NODE_ENV = "production"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 # Build contexts
 [context.production]
@@ -59,10 +85,6 @@
 
 [context.branch-deploy]
   command = "npm install --legacy-peer-deps && npm run netlify-build"
-
-# Post processing
-[build.processing]
-  skip_processing = false
 
 # Post-deploy steps
 [context.production.post_processing]
