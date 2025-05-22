@@ -76,9 +76,10 @@ export default function viteCriticalCSSPlugin(options = {}) {
   return {
     name: 'vite-plugin-critical-css',
     apply: 'build',
+    order: 'post',
     transformIndexHtml: {
-      enforce: 'post',
-      async transform(html) {
+      order: 'post',
+      handler: async (html) => {
         try {
           // Only run after the build is complete and we have CSS files
           if (!fs.existsSync('./dist/assets')) {
