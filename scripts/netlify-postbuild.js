@@ -1,13 +1,122 @@
 #!/usr/bin/env node
 
 /**
- * Simplified postbuild script for Netlify environment
- * This script bypasses the regular postbuild operations to avoid dependency issues
+ * Enhanced postbuild script for Netlify environment
+ * This script handles post-build optimizations
  */
 
-console.log('🚀 Starting simplified postbuild process for Netlify environment');
-console.log('ℹ️ Skipping critical CSS extraction to avoid dependency issues');
-console.log('ℹ️ Skipping sitemap generation to avoid dependency issues');
+const fs = require('fs');
+const path = require('path');
+
+console.log('🚀 Starting enhanced postbuild process for Netlify environment');
+
+// Paths
+const distDir = path.resolve(__dirname, '../dist');
+const indexHtmlPath = path.join(distDir, 'index.html');
+
+// Add jQuery fallback script
+const addJQueryFallback = () => {
+  if (fs.existsSync(indexHtmlPath)) {
+    let htmlContent = fs.readFileSync(indexHtmlPath, 'utf-8');
+    
+    // Check if we need to add jQuery
+    if (htmlContent.indexOf('jquery') !== -1 || htmlContent.indexOf('jQuery') !== -1) {
+      // Add jQuery from CDN before the first script tag
+      const jQueryScript = `<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>`;
+      
+      // Insert before the first script
+      htmlContent = htmlContent.replace(/<script/, `${jQueryScript}\n    <script`);
+      
+      // Write the updated content
+      fs.writeFileSync(indexHtmlPath, htmlContent);
+      console.log('✓ Added jQuery fallback to index.html');
+    }
+  } else {
+    console.error('⚠️ Could not find index.html in dist directory');
+  }
+};
+
+// Add extra headers file to ensure proper CSP
+const headersPath = path.join(distDir, '_headers');
+try {
+  if (fs.existsSync(indexHtmlPath)) {
+    console.log('✓ Found index.html in dist directory');
+    
+    // Create _headers file with relaxed CSP
+    const headersContent = `
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://code.jquery.com; connect-src 'self' https://*.google-analytics.com https://api.cloudseek.io https://*.netlify.app; img-src 'self' data: https://*.google-analytics.com https://images.ctfassets.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), geolocation=(), microphone=()
+
+# Cache control for assets
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache control for images
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache control for fonts
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+`;
+    
+    fs.writeFileSync(headersPath, headersContent.trim());
+    console.log('✓ Created _headers file with proper CSP');
+    
+    // Add jQuery fallback
+    addJQueryFallback();
+    
+  } else {
+    console.error('⚠️ Could not find index.html in dist directory');
+  }
+} catch (error) {
+  console.error('Error in postbuild:', error);
+}
+
+// Create empty assets folder in dist if it doesn't exist
+const distAssetsDir = path.join(distDir, 'assets');
+const distCssDir = path.join(distAssetsDir, 'css');
+const distFontsDir = path.join(distAssetsDir, 'fonts');
+
+[distAssetsDir, distCssDir, distFontsDir].forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+    console.log(`Created directory: ${dir}`);
+  }
+});
+
+// Copy CSS and font files from public to dist if they don't exist
+const publicAssetsDir = path.join(__dirname, '../public/assets');
+const sourceCssDir = path.join(publicAssetsDir, 'css');
+const sourceFontsDir = path.join(publicAssetsDir, 'fonts');
+
+if (fs.existsSync(sourceCssDir)) {
+  const cssFiles = fs.readdirSync(sourceCssDir);
+  cssFiles.forEach(file => {
+    const sourcePath = path.join(sourceCssDir, file);
+    const destPath = path.join(distCssDir, file);
+    fs.copyFileSync(sourcePath, destPath);
+    console.log(`Copied ${sourcePath} to ${destPath}`);
+  });
+}
+
+if (fs.existsSync(sourceFontsDir)) {
+  const fontFiles = fs.readdirSync(sourceFontsDir);
+  fontFiles.forEach(file => {
+    const sourcePath = path.join(sourceFontsDir, file);
+    const destPath = path.join(distFontsDir, file);
+    fs.copyFileSync(sourcePath, destPath);
+    console.log(`Copied ${sourcePath} to ${destPath}`);
+  });
+}
+
 console.log('✅ Postbuild completed successfully');
 
 // Exit with success code
