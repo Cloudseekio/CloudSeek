@@ -45,6 +45,12 @@ self.addEventListener('activate', (event) => {
 
 // Fetch event - serve from cache, fall back to network
 self.addEventListener('fetch', (event) => {
+  // Skip external resources (analytics, fonts, etc.)
+  const url = new URL(event.request.url);
+  if (url.origin !== location.origin) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -74,7 +80,7 @@ self.addEventListener('fetch', (event) => {
           })
           .catch(() => {
             // If both cache and network fail, show offline page for HTML requests
-            if (event.request.headers.get('accept').includes('text/html')) {
+            if (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) {
               return caches.match('/offline.html');
             }
           });
