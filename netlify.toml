@@ -9,6 +9,7 @@
   NETLIFY_USE_YARN = "false"
   NETLIFY_USE_PNPM = "false"
   NETLIFY_USE_NPM = "true"
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
 # Redirects for SPA
 [[redirects]]
