@@ -64,7 +64,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
-      build: {    // Add cache busting hash to file names for better caching    assetsInlineLimit: 4096, // 4kb    cssCodeSplit: true, // Split CSS into chunks    sourcemap: false, // Disable in production for better performance    minify: 'esbuild', // Use esbuild for faster and more reliable minification    target: 'es2020', // Modern ES target
+  build: {
+    // Add cache busting hash to file names for better caching
+    assetsInlineLimit: 4096, // 4kb
+    cssCodeSplit: true, // Split CSS into chunks
+    sourcemap: false, // Disable in production for better performance
+    minify: 'esbuild', // Use esbuild for faster and more reliable minification
+    target: 'es2020', // Modern ES target
     rollupOptions: {
       // Ensure external dependencies don't use CommonJS
       external: [],

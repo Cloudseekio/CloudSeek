@@ -5,7 +5,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const glob = require('glob');
 
 // Patterns to check for
 const UNSAFE_PATTERNS = [
@@ -54,9 +53,28 @@ function MyComponent() {
 }
 `;
 
-// Get all TS/TSX/JS files
+// Get all TS/TSX/JS files using native Node.js
 const getAllFiles = () => {
-  return glob.sync('src/**/*.{ts,tsx,js,jsx}', { ignore: EXCLUDES.map(e => `**/${e}/**`) });
+  const files = [];
+  
+  function walkDir(dir) {
+    if (!fs.existsSync(dir)) return;
+    
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      
+      if (entry.isDirectory() && !EXCLUDES.includes(entry.name)) {
+        walkDir(fullPath);
+      } else if (entry.isFile() && /\.(ts|tsx|js|jsx)$/.test(entry.name)) {
+        files.push(fullPath);
+      }
+    }
+  }
+  
+  walkDir('src');
+  return files;
 };
 
 // Check file content for issues
@@ -103,5 +121,7 @@ const main = () => {
   }
 };
 
-// Run the script
-main(); 
+// Only run if called directly
+if (require.main === module) {
+  main();
+} 
