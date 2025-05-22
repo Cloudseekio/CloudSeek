@@ -1,35 +1,20 @@
 # Build settings
 [build]
-  command = "npm install --legacy-peer-deps && npm run netlify-build"
+  command = "npm install && npm run build"
   publish = "dist"
-  ignore_next_js = true  # Explicitly tell Netlify to ignore Next.js processing
 
-# Configure framework detection
+# Environment variables
 [build.environment]
+  NODE_ENV = "production"
   NETLIFY_USE_YARN = "false"
   NETLIFY_USE_PNPM = "false"
   NETLIFY_USE_NPM = "true"
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
-  NODE_OPTIONS = "--experimental-modules"
-
-# Specify that we're using Vite
-[build.processing]
-  skip_processing = false
-
-# Framework detection configuration
-[build.framework]
-  name = "vite"
-  disable_nextjs = true
 
 # Redirects for SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# Build plugins
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
 
 # Headers for security and caching
 [[headers]]
@@ -39,7 +24,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://ssl.google-analytics.com data: blob:; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://ssl.google-analytics.com https://www.google-analytics.com https://api.cloudseek.io https://*.netlify.app; img-src 'self' data: https://*.google-analytics.com https://ssl.google-analytics.com https://www.google-analytics.com https://images.ctfassets.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://ssl.google-analytics.com data: blob:; script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://*.google-analytics.com https://ssl.google-analytics.com https://www.google-analytics.com https://api.cloudseek.io https://*.netlify.app; img-src 'self' data: https://*.google-analytics.com https://ssl.google-analytics.com https://www.google-analytics.com https://images.ctfassets.net https://via.placeholder.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; object-src 'none'; frame-src 'self'; manifest-src 'self';"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), geolocation=(), microphone=()"
 
@@ -61,36 +46,7 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Environment variables
-[context.production.environment]
-  NODE_ENV = "production"
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
-
-[context.deploy-preview.environment]
-  NODE_ENV = "production"
-  NETLIFY_NEXT_PLUGIN_SKIP = "true"
-
-# Build contexts
-[context.production]
-  command = "npm install --legacy-peer-deps && npm run netlify-build"
-
-[context.deploy-preview]
-  command = "npm install --legacy-peer-deps && npm run netlify-build"
-
-[context.branch-deploy]
-  command = "npm install --legacy-peer-deps && npm run netlify-build"
-
-# Post-deploy steps - using node with ESM flags
-[context.production.post_processing]
-  post_deploy = "node --experimental-modules scripts/netlify-deploy-verify.js"
-
-[context.deploy-preview.post_processing]
-  post_deploy = "node --experimental-modules scripts/netlify-deploy-verify.js"
-
-[context.branch-deploy.post_processing]
-  post_deploy = "node --experimental-modules scripts/netlify-deploy-verify.js"
-
-# Dev settings
+# Development settings
 [dev]
   command = "npm run dev"
   port = 5173
