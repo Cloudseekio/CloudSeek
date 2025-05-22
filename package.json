@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prebuild": "node scripts/pre-check.js && node scripts/convertImagesToWebP.js",
-    "postbuild": "node scripts/extractCriticalCss.js && node scripts/generateSitemap.js",
+    "prebuild": "node -e \"process.env.NODE_ENV === 'production' ? require('./scripts/netlify-prebuild.js') : require('./scripts/pre-check.js')\" && node -e \"process.env.NODE_ENV === 'production' ? require('./scripts/netlify-image-convert.js') : require('./scripts/convertImagesToWebP.js')\"",
+    "postbuild": "node -e \"process.env.NODE_ENV === 'production' ? require('./scripts/netlify-postbuild.js') : (require('./scripts/extractCriticalCss.js') && require('./scripts/generateSitemap.js'))\"",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest",
@@ -19,7 +19,8 @@
     "extract-critical-css": "node scripts/extractCriticalCss.js",
     "generate-sitemap": "node scripts/generateSitemap.js",
     "check-hooks": "node scripts/ensure-react-loading.js",
-    "pre-check": "node scripts/pre-check.js"
+    "pre-check": "node scripts/pre-check.js",
+    "netlify-build": "node scripts/netlify-prebuild.js && node scripts/netlify-image-convert.js && npm run build && node scripts/netlify-postbuild.js"
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^17.0.0",

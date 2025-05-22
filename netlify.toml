@@ -1,6 +1,6 @@
 # Build settings
 [build]
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm install --legacy-peer-deps && npm run netlify-build"
   publish = "dist"
 
 # Redirects for SPA
@@ -17,10 +17,13 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; frame-src 'self'; upgrade-insecure-requests;"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), geolocation=(), microphone=()"
 
 # Cache control for assets
 [[headers]]
@@ -32,7 +35,13 @@
 [[headers]]
   for = "/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=2592000"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache control for fonts
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # Environment variables
 [context.production.environment]
@@ -43,13 +52,27 @@
 
 # Build contexts
 [context.production]
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm install --legacy-peer-deps && npm run netlify-build"
 
 [context.deploy-preview]
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm install --legacy-peer-deps && npm run netlify-build"
 
 [context.branch-deploy]
-  command = "npm install --legacy-peer-deps && npm run build"
+  command = "npm install --legacy-peer-deps && npm run netlify-build"
+
+# Post processing
+[build.processing]
+  skip_processing = false
+
+# Post-deploy steps
+[context.production.post_processing]
+  post_deploy = "node scripts/netlify-deploy-verify.js"
+
+[context.deploy-preview.post_processing]
+  post_deploy = "node scripts/netlify-deploy-verify.js"
+
+[context.branch-deploy.post_processing]
+  post_deploy = "node scripts/netlify-deploy-verify.js"
 
 # Dev settings
 [dev]
