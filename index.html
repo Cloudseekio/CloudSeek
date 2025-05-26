@@ -89,6 +89,49 @@
     </script>
   </head>
   <body>
+    <!-- Hidden Netlify Form definitions -->
+    <!-- Contact Form -->
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="company" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+    
+    <!-- Newsletter Subscription Form -->
+    <form name="newsletter-subscription" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="newsletter-subscription" />
+      <input type="email" name="email" />
+      <input type="text" name="bot-field" />
+    </form>
+    
+    <!-- Blog Newsletter Form -->
+    <form name="blog-newsletter" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="blog-newsletter" />
+      <input type="email" name="email" />
+      <input type="text" name="name" />
+      <input type="text" name="frequency" />
+      <input type="text" name="channels" />
+      <input type="text" name="topics" />
+      <input type="text" name="bot-field" />
+    </form>
+    
+    <!-- Home Contact Form -->
+    <form name="home-contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="home-contact" />
+      <input type="text" name="fullname" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="organization" />
+      <textarea name="project-description"></textarea>
+      <input type="checkbox" name="subscribe-updates" />
+      <input type="checkbox" name="sms-consent" />
+      <input type="text" name="bot-field" />
+    </form>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx" fetchpriority="high"></script>
     

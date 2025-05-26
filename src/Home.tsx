@@ -6,6 +6,13 @@ import { SmoothInfiniteCarousel } from './components/SmoothInfiniteCarousel';
 import { BLOG_POSTS } from './data/blogPosts';
 import HeroSection from './components/HeroSection';
 
+// Helper function to encode form data for Netlify Forms
+const encode = (data: Record<string, string>) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -841,7 +848,51 @@ const Home: React.FC = () => {
                 <h3 className="text-xl font-semibold text-blue-300 mb-5">
                   How can we help you?
                 </h3>
-                <form className="space-y-4">
+                <form 
+                  name="home-contact" 
+                  method="POST" 
+                  data-netlify="true" 
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const formData = new FormData(e.currentTarget);
+                    const formValues: Record<string, string> = {};
+                    
+                    formData.forEach((value, key) => {
+                      formValues[key] = value.toString();
+                    });
+                    
+                    // Add form name
+                    formValues['form-name'] = 'home-contact';
+                    
+                    fetch('/', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                      body: encode(formValues)
+                    })
+                    .then(() => {
+                      alert('Thank you for your message! We will get back to you soon.');
+                      // Reset form
+                      e.currentTarget.reset();
+                    })
+                    .catch(error => {
+                      alert('Oops! There was a problem submitting your form. Please try again later.');
+                      console.error('Form submission error:', error);
+                    });
+                  }}
+                  className="space-y-4"
+                >
+                  {/* Hidden input for Netlify form name */}
+                  <input type="hidden" name="form-name" value="home-contact" />
+                  
+                  {/* Honeypot field */}
+                  <p className="hidden">
+                    <label>
+                      Don't fill this out if you're human: 
+                      <input name="bot-field" />
+                    </label>
+                  </p>
+                  
                   <div className="grid md:grid-cols-2 gap-4">
                     {/* Full Name */}
                     <div>
@@ -850,6 +901,7 @@ const Home: React.FC = () => {
                       </label>
                       <input 
                         type="text"
+                        name="fullname"
                         className="w-full bg-gray-800 border-0 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 transition-all hover:bg-gray-750"
                         placeholder="Enter your full name"
                         required
@@ -863,6 +915,7 @@ const Home: React.FC = () => {
                       </label>
                       <input 
                         type="email"
+                        name="email"
                         className="w-full bg-gray-800 border-0 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 transition-all hover:bg-gray-750"
                         placeholder="Enter your work email"
                         required
@@ -878,6 +931,7 @@ const Home: React.FC = () => {
                       </label>
                       <input 
                         type="tel"
+                        name="phone"
                         className="w-full bg-gray-800 border-0 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 transition-all hover:bg-gray-750"
                         placeholder="Enter your phone number"
                       />
@@ -890,6 +944,7 @@ const Home: React.FC = () => {
                       </label>
                       <input 
                         type="text"
+                        name="organization"
                         className="w-full bg-gray-800 border-0 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 transition-all hover:bg-gray-750"
                         placeholder="Enter your organization"
                       />
@@ -902,6 +957,7 @@ const Home: React.FC = () => {
                       PROJECT DESCRIPTION
                     </label>
                     <textarea 
+                      name="project-description"
                       className="w-full bg-gray-800 border-0 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 h-24 transition-all hover:bg-gray-750"
                       placeholder="Describe your project"
                     ></textarea>
@@ -912,6 +968,7 @@ const Home: React.FC = () => {
                     <label className="flex items-center space-x-3">
                       <input 
                         type="checkbox"
+                        name="subscribe-updates"
                         className="form-checkbox h-4 w-4 text-blue-500 rounded border-gray-600 bg-gray-800"
                       />
                       <span className="text-gray-400 text-sm">Check here to subscribe for updates.</span>
@@ -919,6 +976,7 @@ const Home: React.FC = () => {
                     <label className="flex items-center space-x-3">
                       <input 
                         type="checkbox"
+                        name="sms-consent"
                         className="form-checkbox h-4 w-4 text-blue-500 rounded border-gray-600 bg-gray-800"
                       />
                       <span className="text-gray-400 text-sm">By checking this box, you agree to receive SMS messages from CloudSeek. Reply 'STOP' to opt-out at any time.</span>

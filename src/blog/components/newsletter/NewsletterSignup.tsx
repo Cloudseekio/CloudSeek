@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { useTheme } from '../../../context/ThemeContext';
 import { NewsletterPreferences, NotificationChannel, NewsletterFrequency } from '../../../models/Newsletter';
 
+// Helper function to encode form data for Netlify Forms
+const encode = (data: Record<string, string>) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 interface NewsletterSignupProps {
   onSubmit: (email: string, name: string, preferences: NewsletterPreferences) => Promise<void>;
   className?: string;
@@ -24,6 +31,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
 
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [botField, setBotField] = useState('');
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -49,9 +57,31 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
 
     try {
       setIsSubmitting(true);
+      
+      // Prepare form data for Netlify Forms
+      const formData: Record<string, string> = {
+        'form-name': 'blog-newsletter',
+        'email': email,
+        'name': name,
+        'bot-field': botField,
+        'frequency': preferences.frequency,
+        'channels': preferences.channels.join(','),
+        'topics': preferences.topics.join(',')
+      };
+      
+      // Submit to Netlify Forms
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode(formData)
+      });
+      
+      // Also call the original onSubmit handler
       await onSubmit(email, name, preferences);
+      
       setEmail('');
       setName('');
+      setBotField('');
       setShowAdvanced(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to subscribe');
@@ -84,7 +114,29 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
 
   return (
     <div className={`${className} ${isDark ? 'text-gray-200' : 'text-gray-800'}`}>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form 
+        name="blog-newsletter" 
+        method="POST" 
+        data-netlify="true" 
+        data-netlify-honeypot="bot-field" 
+        onSubmit={handleSubmit} 
+        className="space-y-4"
+      >
+        {/* Hidden input for Netlify form name */}
+        <input type="hidden" name="form-name" value="blog-newsletter" />
+        
+        {/* Honeypot field */}
+        <p className="hidden">
+          <label>
+            Don't fill this out if you're human: 
+            <input 
+              name="bot-field" 
+              value={botField} 
+              onChange={(e) => setBotField(e.target.value)} 
+            />
+          </label>
+        </p>
+        
         {/* Email Input */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-1">
@@ -93,6 +145,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
           <input
             type="email"
             id="email"
+            name="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             className={`w-full px-4 py-2 rounded-lg border ${
@@ -113,6 +166,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
           <input
             type="text"
             id="name"
+            name="name"
             value={name}
             onChange={e => setName(e.target.value)}
             className={`w-full px-4 py-2 rounded-lg border ${

@@ -5,8 +5,16 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import clsx from 'clsx';
 
+// Helper function to encode form data for Netlify Forms
+const encode = (data: Record<string, string>) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 interface NewsletterFormData {
   email: string;
+  'bot-field'?: string;
 }
 
 export default function NewsletterSubscription() {
@@ -25,9 +33,15 @@ export default function NewsletterSubscription() {
     setSubmitStatus(null);
     
     try {
-      // TODO: Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      console.log('Subscribing email:', data.email);
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'newsletter-subscription',
+          ...data
+        })
+      });
+      
       setSubmitStatus('success');
       reset();
     } catch (error: unknown) {
@@ -47,7 +61,24 @@ export default function NewsletterSubscription() {
         Get the latest insights and tutorials delivered straight to your inbox.
       </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form 
+        name="newsletter-subscription"
+        method="POST"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        onSubmit={handleSubmit(onSubmit)} 
+        className="space-y-4"
+      >
+        <input type="hidden" name="form-name" value="newsletter-subscription" />
+        
+        {/* Honeypot field */}
+        <p className="hidden">
+          <label>
+            Don't fill this out if you're human: 
+            <input {...register('bot-field')} />
+          </label>
+        </p>
+        
         <div>
           <input
             type="email"

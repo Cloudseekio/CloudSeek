@@ -2,13 +2,21 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Linkedin, MessageSquare } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 
+// Helper function to encode form data for Netlify Forms
+const encode = (data: Record<string, string>) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     company: '',
-    message: ''
+    message: '',
+    'bot-field': ''
   });
   
   const [formStatus, setFormStatus] = useState({
@@ -28,23 +36,39 @@ const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulate form submission
-    setFormStatus({
-      submitted: true,
-      error: false,
-      message: 'Thank you! Your message has been received. We will get back to you shortly.'
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'contact',
+        ...formData
+      })
+    })
+    .then(() => {
+      setFormStatus({
+        submitted: true,
+        error: false,
+        message: 'Thank you! Your message has been received. We will get back to you shortly.'
+      });
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        message: '',
+        'bot-field': ''
+      });
+    })
+    .catch(error => {
+      setFormStatus({
+        submitted: false,
+        error: true,
+        message: 'Oops! There was an error submitting the form. Please try again later.'
+      });
+      console.error('Form submission error:', error);
     });
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      message: ''
-    });
-    
-    // In a real application, you would send the form data to your backend here
   };
 
   return (
@@ -72,7 +96,24 @@ const ContactPage: React.FC = () => {
               </div>
             )}
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form 
+              name="contact" 
+              method="POST" 
+              data-netlify="true" 
+              data-netlify-honeypot="bot-field" 
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              {/* Hidden input for Netlify form name */}
+              <input type="hidden" name="form-name" value="contact" />
+              
+              {/* Honeypot field */}
+              <p className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" value={formData['bot-field']} onChange={handleChange} />
+                </label>
+              </p>
+              
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Name*

@@ -3,8 +3,19 @@ import { ArrowRight, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BLOG_POSTS } from './data/blogPosts';
 
+// Helper function to encode form data for Netlify Forms
+const encode = (data: Record<string, string>) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+};
+
 function Blog() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [email, setEmail] = useState('');
+  const [botField, setBotField] = useState('');
+  const [subscribeStatus, setSubscribeStatus] = useState<'success' | 'error' | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Filter posts based on search query
   const filteredPosts = searchQuery
@@ -13,6 +24,37 @@ function Blog() {
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : BLOG_POSTS;
+
+  // Handle newsletter subscription
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) return;
+    
+    setIsSubmitting(true);
+    setSubscribeStatus(null);
+    
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'blog-newsletter',
+          email,
+          'bot-field': botField
+        })
+      });
+      
+      setSubscribeStatus('success');
+      setEmail('');
+      setBotField('');
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      setSubscribeStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -105,19 +147,57 @@ function Blog() {
               Join 5000+ Salesforce professionals and cloud technology experts staying up-to-date with CloudSeek's newsletter.
             </p>
             
-            <form className="flex max-w-md mx-auto">
+            <form 
+              name="blog-newsletter"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              className="flex max-w-md mx-auto"
+              onSubmit={handleSubscribe}
+            >
+              <input type="hidden" name="form-name" value="blog-newsletter" />
+              
+              {/* Honeypot field */}
+              <div className="hidden">
+                <label>
+                  Don't fill this out if you're human: 
+                  <input 
+                    name="bot-field" 
+                    value={botField} 
+                    onChange={(e) => setBotField(e.target.value)} 
+                  />
+                </label>
+              </div>
+              
               <input 
                 type="email" 
+                name="email"
                 placeholder="Your business email" 
                 className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 text-[15px]"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
               <button 
                 type="submit" 
-                className="bg-blue-600 text-white px-5 py-2 rounded-r-md font-medium text-[15px] hover:bg-blue-700 transition-colors"
+                className="bg-blue-600 text-white px-5 py-2 rounded-r-md font-medium text-[15px] hover:bg-blue-700 transition-colors disabled:opacity-70"
+                disabled={isSubmitting}
               >
-                Subscribe
+                {isSubmitting ? 'Subscribing...' : 'Subscribe'}
               </button>
             </form>
+            
+            {subscribeStatus === 'success' && (
+              <p className="mt-3 text-sm text-green-600">
+                Thanks for subscribing! We'll keep you updated with the latest news.
+              </p>
+            )}
+            
+            {subscribeStatus === 'error' && (
+              <p className="mt-3 text-sm text-red-600">
+                Something went wrong. Please try again later.
+              </p>
+            )}
           </div>
         </div>
       </div>
