@@ -27,6 +27,36 @@ A modern, accessible UI component library for React applications.
 - **Responsive**: Works across different screen sizes
 - **Dark Mode Support**: Automatic detection of system preferences
 
+## Automated Sitemap Generation
+
+The website automatically generates a `sitemap.xml` file during the build process to ensure search engines can properly index all pages.
+
+### How it works
+
+1. **Build Process**: The `prebuild` script runs before the main build
+2. **Dynamic Generation**: Sitemap includes:
+   - Static pages (home, services, about, contact, etc.)
+   - Blog posts with proper last modified dates
+   - Category pages with URL encoding
+   - Case study pages
+3. **SEO Optimized**: Uses `https://cloudseek.io` as the base URL with proper priorities and change frequencies
+
+### Manual Generation
+
+You can manually generate the sitemap at any time:
+
+```bash
+npm run generate-sitemap
+```
+
+### Configuration
+
+The sitemap generation script is located at `scripts/generate-sitemap.js` and includes:
+- Comprehensive error handling
+- Logging for build visibility
+- Proper XML formatting
+- SEO best practices for priorities and change frequencies
+
 ## Getting Started
 
 1. Install the package:
