@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { siteUrl as SITE_URL, siteName as SITE_NAME, defaultDescription as DEFAULT_DESCRIPTION, defaultImage as DEFAULT_IMAGE, twitterHandle as DEFAULT_TWITTER } from '../config/site';
 
 interface FAQItem {
   question: string;
@@ -110,7 +111,7 @@ const SEO: React.FC<SEOProps> = ({
   publishDate,
   modifiedDate,
   author,
-  twitterHandle = '@cloudseek',
+  twitterHandle = DEFAULT_TWITTER,
   structuredData,
   noIndex = false,
   faqItems,
@@ -123,13 +124,11 @@ const SEO: React.FC<SEOProps> = ({
   videoDetails,
   reviewDetails
 }) => {
-  const siteTitle = 'CloudSeek';
+  const siteTitle = SITE_NAME;
   const fullTitle = title ? `${title} | ${siteTitle}` : siteTitle;
-  const defaultDescription = 'Salesforce implementation experts helping businesses transform operations, enhance customer relationships, and drive growth.';
-  const metaDescription = description || defaultDescription;
-  const defaultImage = '/images/cloudseek-social-card.jpg';
-  const metaImage = image || defaultImage;
-  const siteUrl = 'https://cloudseek.io';
+  const metaDescription = description || DEFAULT_DESCRIPTION;
+  const metaImage = image || DEFAULT_IMAGE;
+  const siteUrl = SITE_URL;
   
   /**
    * Normalize a URL path to ensure consistency

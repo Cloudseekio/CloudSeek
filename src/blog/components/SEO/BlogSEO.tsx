@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { siteUrl as SITE_URL, siteName as SITE_NAME, defaultDescription as DEFAULT_DESCRIPTION, defaultImage as DEFAULT_IMAGE } from '../../../config/site';
 import { BlogPost, Author } from '../../../models/Blog';
 
 interface BlogSEOProps {
@@ -26,18 +27,18 @@ const BlogSEO: React.FC<BlogSEOProps> = ({
   image: customImage
 }) => {
   // Default site metadata
-  const siteName = 'CloudSeek Blog';
-  const siteUrl = 'https://cloudseek.com';
+  const siteName = `${SITE_NAME} Blog`;
+  const siteUrl = SITE_URL;
 
   // Determine title
   const title = customTitle || (post ? post.title : author ? `${author.name} - Author Profile` : 'Blog');
   const fullTitle = `${title} | ${siteName}`;
 
   // Determine description
-  const description = customDescription || (post ? post.excerpt : author ? author.bio : 'Latest articles and insights');
+  const description = customDescription || (post ? post.excerpt : author ? author.bio : DEFAULT_DESCRIPTION);
 
   // Determine image
-  const image = customImage || (post ? post.coverImage.url : author?.avatarUrl);
+  const image = customImage || (post ? post.coverImage.url : author?.avatarUrl || DEFAULT_IMAGE);
 
   // Determine page type
   const pageType = isAuthorPage ? 'profile' : (post ? 'article' : 'website');
