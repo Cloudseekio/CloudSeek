@@ -187,32 +187,13 @@ const SEO: React.FC<SEOProps> = ({
     return {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "CloudSeek",
-      "url": "https://www.cloudseek.io",
-      "logo": "https://www.cloudseek.io/logo.png",
-      "description": "A leading Salesforce implementation partner specializing in digital transformation.",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+1-555-123-4567",
-        "contactType": "customer service",
-        "email": "info@cloudseek.io",
-        "areaServed": ["US", "UAE", "Pakistan"],
-        "availableLanguage": ["English", "Arabic"]
+      "name": siteTitle,
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/logo.svg`
       },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Technology Drive",
-        "addressLocality": "Raleigh",
-        "addressRegion": "NC",
-        "postalCode": "27601",
-        "addressCountry": "US"
-      },
-      "sameAs": [
-        "https://www.facebook.com/cloudseek",
-        "https://www.twitter.com/cloudseek",
-        "https://www.linkedin.com/company/cloudseek",
-        "https://www.instagram.com/cloudseek"
-      ]
+      "description": metaDescription
     };
   };
 

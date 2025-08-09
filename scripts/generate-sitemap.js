@@ -113,15 +113,8 @@ const generateSitemap = (posts, categories) => {
     `;
   });
   
-  // Categories (avoid query parameters; use clean routes)
-  const categoryUrls = categories.map(category => `
-    <url>
-      <loc>${siteUrl}/blog/category/${encodeURIComponent(category.slug)}</loc>
-      <lastmod>${now}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.6</priority>
-    </url>
-  `);
+  // Categories temporarily disabled in sitemap until route exists in SPA/SSR
+  const categoryUrls = [];
   
   // Static pages
   const staticUrls = staticPages.map(page => `
