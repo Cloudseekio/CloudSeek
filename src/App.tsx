@@ -151,7 +151,7 @@ function App() {
                   You are currently offline. Some features may be limited.
                 </div>
               )}
-              <PWAInstallPrompt />
+              {import.meta.env.DEV && <PWAInstallPrompt />}
               <ConsentManagerWrapper />
               <Suspense fallback={<LoadingFallback type="page" message="Loading CloudSeek..." />}>
                 <Routes>
