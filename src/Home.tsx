@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Cloud, Menu, X, ChevronLeft, ChevronRight, Layout, ArrowRight, BarChart, Headphones, Mail, Target, Brain } from 'lucide-react';
 import RotatingTextSlider from './components/RotatingTextSlider';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,7 @@ const encode = (data: Record<string, string>) => {
 const Home: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const currentSlide = 0;
 
   const cards = [
     {
