@@ -18,13 +18,13 @@ const isBrowser = typeof window !== 'undefined' && window.document;
 if (isBrowser) {
   try {
     initializePerformanceMonitoring({
-      debug: process.env.NODE_ENV === 'development',
+      debug: import.meta.env.DEV,
       monitor: {
         enabled: true,
-        sampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1, // Full sampling in dev
+        sampleRate: import.meta.env.PROD ? 0.1 : 1,
       },
       analytics: {
-        enabled: process.env.NODE_ENV === 'production', // Only in production
+        enabled: import.meta.env.PROD,
       }
     });
     logger.info('Performance monitoring initialized successfully');

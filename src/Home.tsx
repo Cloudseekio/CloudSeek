@@ -709,39 +709,39 @@ const Home: React.FC = () => {
             {/* Integration Logos - First Row - Increased logo sizes */}
             <div className="flex flex-wrap justify-center items-center gap-x-14 gap-y-10 mb-14">
               {/* Increased width from w-28/w-32 to w-36/w-40 */}
-              <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/team.svg" alt="Microsoft Teams" className="h-12" />
-              </div>
-              <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/Slack.svg" alt="Slack" className="h-12" />
-              </div>
-              <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/Zapier.svg" alt="Zapier" className="h-12" />
-              </div>
-              <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/trello.svg" alt="Trello" className="h-12" />
-              </div>
-              <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/meet.svg" alt="Google Meet" className="h-12" />
-              </div>
+                <div className="w-36 md:w-40 flex justify-center">
+                  <img src="/assets/team.svg" alt="Microsoft Teams" className="h-12" width="96" height="48" />
+                </div>
+                <div className="w-36 md:w-40 flex justify-center">
+                  <img src="/assets/Slack.svg" alt="Slack" className="h-12" width="96" height="48" />
+                </div>
+                <div className="w-36 md:w-40 flex justify-center">
+                  <img src="/assets/Zapier.svg" alt="Zapier" className="h-12" width="96" height="48" />
+                </div>
+                <div className="w-36 md:w-40 flex justify-center">
+                  <img src="/assets/trello.svg" alt="Trello" className="h-12" width="96" height="48" />
+                </div>
+                <div className="w-36 md:w-40 flex justify-center">
+                  <img src="/assets/meet.svg" alt="Google Meet" className="h-12" width="96" height="48" />
+                </div>
             </div>
             
             {/* Integration Logos - Second Row - Increased logo sizes */}
             <div className="flex flex-wrap justify-center items-center gap-x-14 gap-y-10">
               <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/Zendesk.svg" alt="Zendesk" className="h-12" />
+                <img src="/assets/Zendesk.svg" alt="Zendesk" className="h-12" width="96" height="48" />
               </div>
               <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/Jira.svg" alt="Jira" className="h-12" />
+                <img src="/assets/Jira.svg" alt="Jira" className="h-12" width="96" height="48" />
               </div>
               <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/gdrive.svg" alt="Google Drive" className="h-12" />
+                <img src="/assets/gdrive.svg" alt="Google Drive" className="h-12" width="96" height="48" />
               </div>
               <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/asana.svg" alt="Asana" className="h-12" />
+                <img src="/assets/asana.svg" alt="Asana" className="h-12" width="96" height="48" />
               </div>
               <div className="w-36 md:w-40 flex justify-center">
-                <img src="/assets/intercom.svg" alt="Intercom" className="h-12" />
+                <img src="/assets/intercom.svg" alt="Intercom" className="h-12" width="96" height="48" />
               </div>
             </div>
           </div>
@@ -768,6 +768,8 @@ const Home: React.FC = () => {
                     src="/assets/Salesforce.svg" 
                     alt="Salesforce" 
                     className="h-16 mx-auto"
+                    width="128"
+                    height="64"
                   />
                 </div>
                 <div>
@@ -787,6 +789,8 @@ const Home: React.FC = () => {
                     src="/assets/aws.svg" 
                     alt="AWS" 
                     className="h-16 mx-auto"
+                    width="128"
+                    height="64"
                   />
                 </div>
                 <div>

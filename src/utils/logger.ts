@@ -98,21 +98,22 @@ class Logger {
     
     // Log to console in browser
     if (this.isBrowser) {
+      const suppressConsole = (typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.PROD) || (typeof process !== 'undefined' && process.env && process.env.NODE_ENV === 'production');
       switch (options.level) {
         case 'debug':
-          console.debug(formattedMessage);
+          if (!suppressConsole) console.debug(formattedMessage);
           break;
         case 'info':
-          console.info(formattedMessage);
+          if (!suppressConsole) console.info(formattedMessage);
           break;
         case 'warn':
-          console.warn(formattedMessage);
+          if (!suppressConsole) console.warn(formattedMessage);
           break;
         case 'error':
-          console.error(formattedMessage);
+          if (!suppressConsole) console.error(formattedMessage);
           if (this.options.reportingEndpoint) {
             this.reportError(message, options.tags).catch(err => {
-              console.error('Error reporting to endpoint:', err);
+              if (!suppressConsole) console.error('Error reporting to endpoint:', err);
             });
           }
           break;
