@@ -107,7 +107,7 @@ const ScrollToTop = () => {
 const AnalyticsWrapper = ({ children }: { children: ReactNode }) => {
   // Initialize analytics with our configuration
   useAnalytics({
-    debug: true,
+    debug: import.meta.env.DEV,
     excludePaths: ['/privacy', '/offline'],
     globalParams: {
       app_version: '1.0.0'
@@ -151,7 +151,8 @@ function App() {
                   You are currently offline. Some features may be limited.
                 </div>
               )}
-              <PWAInstallPrompt />
+              {/* Disable PWA prompt in non-dev to avoid bottom overlay in previews */}
+              {import.meta.env.DEV ? <PWAInstallPrompt /> : null}
               <ConsentManagerWrapper />
               <Suspense fallback={<LoadingFallback type="page" message="Loading CloudSeek..." />}>
                 <Routes>

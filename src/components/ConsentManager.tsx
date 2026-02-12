@@ -51,7 +51,7 @@ interface ConsentManagerProps {
  */
 const ConsentManager: React.FC<ConsentManagerProps> = ({
   className = '',
-  autoShow = true,
+  autoShow = false,
   onConsentUpdate
 }) => {
   // State for consent settings

@@ -142,7 +142,8 @@ const createConfig = (): ServicesConfig => {
       accessToken: getEnvVar('VITE_CONTENTFUL_ACCESS_TOKEN', ''),
       environment: getEnvVar('VITE_CONTENTFUL_ENVIRONMENT', 'master'),
       cacheTTL: getEnvNum('VITE_CONTENTFUL_CACHE_TTL', 300), // Default: 5 minutes
-      enablePreviewMode: getEnvBool('VITE_CONTENTFUL_PREVIEW_MODE', environment !== 'production'),
+      // Never enable preview mode by default; require explicit opt-in via env
+      enablePreviewMode: getEnvBool('VITE_CONTENTFUL_PREVIEW_MODE', false),
       defaultLocale: getEnvVar('VITE_CONTENTFUL_DEFAULT_LOCALE', 'en-US')
     },
     

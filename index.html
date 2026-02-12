@@ -17,22 +17,20 @@
     <!-- Preconnect to important domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://api.cloudseek.io" crossorigin />
-    <link rel="preconnect" href="https://images.ctfassets.net" crossorigin />
-    <link rel="preconnect" href="https://cdn.contentful.com" crossorigin />
+    <!-- Keep preconnects lean to avoid LH warnings -->
+    <!-- <link rel="preconnect" href="https://api.cloudseek.io" crossorigin /> -->
+    <!-- <link rel="preconnect" href="https://images.ctfassets.net" crossorigin /> -->
+    <!-- <link rel="preconnect" href="https://cdn.contentful.com" crossorigin /> -->
     
     <!-- DNS prefetch for third-party domains -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://images.ctfassets.net" />
-    <link rel="dns-prefetch" href="https://api.cloudseek.io" />
     
-    <!-- Preload critical resources -->
-    
-    
-    
+    <!-- Preload critical fonts to improve LCP -->
+    <link rel="preload" as="font" href="/assets/fonts/SF-Pro-Display-Regular.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="/assets/fonts/SF-Pro-Display-Medium.woff2" type="font/woff2" crossorigin>
+    <link rel="preload" as="font" href="/assets/fonts/SF-Pro-Display-Bold.woff2" type="font/woff2" crossorigin>
     <!-- PWA support -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />

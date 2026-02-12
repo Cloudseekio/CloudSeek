@@ -1,6 +1,7 @@
 import React from 'react';
 import { BlogPost, Author } from '../../../models/Blog';
 import BlogSEO from './BlogSEO';
+import { siteUrl as SITE_URL } from '../../../config/site';
 
 interface WithBlogSEOProps {
   post?: BlogPost;
@@ -30,6 +31,5 @@ export const withBlogSEO = <P extends object>(
 
 // Helper function to generate canonical URL
 export const generateCanonicalUrl = (path: string): string => {
-  const baseUrl = 'https://cloudseek.com'; // Replace with your domain
-  return `${baseUrl}${path}`;
-}; 
+  return `${SITE_URL}${path}`;
+};

@@ -8,8 +8,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// Define the site URL
-const SITE_URL = 'https://cloudseek.io';
+// Define the site URL, allow override via env
+const SITE_URL = process.env.SITE_URL || 'https://cloudseek.io';
 
 // Mock blog categories (from src/services/blogService.ts)
 const mockCategories = [
@@ -113,15 +113,8 @@ const generateSitemap = (posts, categories) => {
     `;
   });
   
-  // Categories
-  const categoryUrls = categories.map(category => `
-    <url>
-      <loc>${siteUrl}/blog?category=${encodeURIComponent(category.slug)}</loc>
-      <lastmod>${now}</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.6</priority>
-    </url>
-  `);
+  // Categories temporarily disabled in sitemap until route exists in SPA/SSR
+  const categoryUrls = [];
   
   // Static pages
   const staticUrls = staticPages.map(page => `
