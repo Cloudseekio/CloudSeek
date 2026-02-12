@@ -64,28 +64,29 @@ const Footer: React.FC = () => {
         </div>
       </div>
       
-      {/* Chat/Support Button with rounded avatar image */}
-      <div className="fixed bottom-6 right-6">
-        <a 
-          href="/contact" 
-          className="block rounded-full overflow-hidden w-14 h-14 shadow-lg"
-          aria-label="Contact support"
-          role="button"
-        >
-          <img 
-            src="/path/to/support-avatar.png" 
-            alt="Support assistant" 
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              // Fallback if image fails to load
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.style.backgroundColor = '#4CAF50';
-              target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>';
-            }}
-          />
-        </a>
-      </div>
+      {/* Chat/Support Button disabled in preview/prod to avoid unexpected overlays */}
+      {import.meta.env.DEV && (
+        <div className="fixed bottom-6 right-6">
+          <a 
+            href="/contact" 
+            className="block rounded-full overflow-hidden w-14 h-14 shadow-lg"
+            aria-label="Contact support"
+            role="button"
+          >
+            <img 
+              src="/path/to/support-avatar.png" 
+              alt="Support assistant" 
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.style.backgroundColor = '#4CAF50';
+                target.src = 'data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"white\"><path d=\"M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z\"/></svg>';
+              }}
+            />
+          </a>
+        </div>
+      )}
     </footer>
   );
 };

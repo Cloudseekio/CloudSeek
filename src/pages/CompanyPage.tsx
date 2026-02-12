@@ -178,14 +178,7 @@ const CompanyPage: React.FC = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-              <img src="/images/team/sami-azam.jpg" alt="Sami Azam" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 text-center">Sami Azam</h3>
-              <p className="text-blue-600 text-center mb-4">Chief Executive Officer</p>
-              <p className="text-gray-600 text-center">A visionary leader with extensive experience in digital transformation and Salesforce implementation.</p>
-            </div>
-            
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
               <img src="/images/team/kaleem-azam.jpg" alt="Kaleem Azam" className="w-32 h-32 object-cover rounded-full mx-auto mb-4" />
               <h3 className="text-xl font-bold text-gray-900 text-center">Kaleem Azam</h3>

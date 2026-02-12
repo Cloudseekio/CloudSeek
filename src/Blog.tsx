@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ArrowRight, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import OptimizedImage from './components/OptimizedImage';
 import { BLOG_POSTS } from './data/blogPosts';
 
 // Helper function to encode form data for Netlify Forms
@@ -103,11 +104,13 @@ function Blog() {
           {filteredPosts.map((post) => (
             <article key={post.id}>
               <Link to={`/blog/${post.slug}`} className="block group">
-                <div className="aspect-[4/3] rounded-lg overflow-hidden mb-4">
-                  <img 
-                    src={post.imageUrl} 
-                    alt={post.title} 
-                    className="w-full h-full object-cover"
+                <div className="rounded-lg overflow-hidden mb-4">
+                  <OptimizedImage
+                    src={post.imageUrl}
+                    alt={post.title}
+                    width={1200}
+                    height={900}
+                    wrapperClassName="w-full"
                   />
                 </div>
                 

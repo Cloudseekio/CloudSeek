@@ -118,7 +118,7 @@ export interface AnalyticsConfig {
 const analyticsConfig: AnalyticsConfig = {
   measurementId: 'G-8H4P0JWKL1', // Your GA4 Measurement ID
   cookieDomain: 'auto',
-  debug: true, // Enable for development, disable for production
+  debug: import.meta.env.DEV ? true : false,
   
   // Default consent settings (denied by default for GDPR compliance)
   defaultConsent: {
